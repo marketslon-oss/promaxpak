@@ -733,3 +733,110 @@ body {
     color: #6B7280;
     padding: 20px 0;
 }
+
+/* =========================================
+   АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ ТА ПЛАНШЕТИ)
+   ========================================= */
+
+@media (max-width: 1024px) {
+    /* На планшетах показуємо по 2 товари в ряд */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    /* 1. Перебудовуємо шапку сайту */
+    .top-header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    /* 2. Перебудовуємо головний макет (меню зверху, товари знизу) */
+    .catalog-layout {
+        grid-template-columns: 1fr; /* Прибираємо бокову колонку 230px */
+        padding: 15px;
+        gap: 20px;
+    }
+
+    /* 3. Меню категорій робимо зручними кнопками у два стовпці */
+    .category-menu {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    
+    .category-menu a {
+        padding: 10px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    /* 4. Контентна зона та картки товарів */
+    .content-area {
+        padding: 15px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 товари в ряд на телефонах */
+        gap: 10px;
+    }
+
+    .item-info {
+        padding: 10px;
+    }
+
+    .item-bottom {
+        flex-direction: column; /* Ціна і кнопка одна над одною */
+        gap: 10px;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .btn-buy {
+        justify-content: center;
+    }
+
+    /* 5. Мобільний кошик (все в одну колонку) */
+    .checkout-grid-2, 
+    .payment-options-grid, 
+    .cart-actions-grid, 
+    .checkout-bottom-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-scroll-body {
+        padding: 15px;
+    }
+
+    /* 6. Зменшуємо плаваючі кнопки зв'язку */
+    .floating-buttons {
+        bottom: 20px;
+        right: 20px;
+        gap: 10px;
+    }
+    
+    .float-btn {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* На дуже вузьких екранах робимо 1 товар в ряд і меню в 1 колонку */
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-menu {
+        grid-template-columns: 1fr;
+    }
+}
