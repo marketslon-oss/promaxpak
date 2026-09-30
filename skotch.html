@@ -58,10 +58,12 @@
         .cart-wrapper:hover { transform: scale(1.1); }
         .cart-counter { position: absolute; top: -8px; right: -10px; background-color: #EF4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; min-width: 20px; text-align: center; }
         
-        /* Класи для красивого опису і коду */
         .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
         .item-sku span { color: #4B5563; font-weight: 700; }
         .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
+        
+        .card-image img, .item-title { cursor: pointer; transition: opacity 0.2s; }
+        .card-image img:hover, .item-title:hover { opacity: 0.85; }
     </style>
 </head>
 <body>
@@ -93,7 +95,6 @@
         <aside class="sidebar">
             <h3>Каталог продукції</h3>
             <nav class="category-menu">
-                <!-- Активний клас на Пакувальному скотчі -->
                 <a href="skotch.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч пакувальний</a>
                 <a href="color-skotch.html">Скотч кольоровий</a>
                 <a href="office-skotch.html">Скотч канцелярський</a>
@@ -114,9 +115,21 @@
                 
                 <!-- Товар 1: 100 м -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/100.jpeg" alt="Скотч 100м"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч пакувальний прозорий 100 м"
+                         data-price="25"
+                         data-boxqty="72"
+                         data-sku="003"
+                         data-img="images/100.jpeg"
+                         data-desc="Прозорий пакувальний скотч призначений для надійної фіксації коробок, пакетів і вантажів. Ідеально підходить для побутового та промислового використання, забезпечує міцне склеювання та акуратний зовнішній вигляд упаковки."
+                         data-advantages="Міцна фіксація на різних поверхнях|Прозора стрічка не порушує зовнішній вигляд пакування|Універсальне застосування для дому, офісу та складу|Товщина стрічки забезпечує довговічність і стійкість до розриву"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Тип: Прозорий | Довжина: 100 м | Ширина: 45 мм | Товщина: 40 мкм" style="cursor: pointer;">
+                        <img src="images/100.jpeg" alt="Скотч 100м">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч пакувальний прозорий 100 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч пакувальний прозорий 100 м
+                        </div>
                         <div class="item-sku">Код: <span>003</span></div>
                         <div class="item-desc">Оптимальний вибір для пакування коробок середньої ваги. Забезпечує високу клейкість та надійність.</div>
                         <div class="item-specs"><p>📏 100 м х 45 мм</p><p>📦 В ящику: 72 шт</p></div>
@@ -131,9 +144,21 @@
 
                 <!-- Товар 2: 200 м -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/200.jpeg" alt="Скотч 200м"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч пакувальний прозорий 200 м"
+                         data-price="45"
+                         data-boxqty="36"
+                         data-sku="001"
+                         data-img="images/200.jpeg"
+                         data-desc="Надійний вибір для інтенсивного пакування. Стійкий до розриву. Гарантує безпеку вантажу при транспортуванні на великі відстані."
+                         data-advantages="Збільшена намотка для економії часу|Висока стійкість до розривів та навантажень|Надійна клейова основа суттєво покращує фіксацію"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Тип: Прозорий | Довжина: 200 м | Ширина: 45 мм | Товщина: 40 мкм" style="cursor: pointer;">
+                        <img src="images/200.jpeg" alt="Скотч 200м">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч пакувальний прозорий 200 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч пакувальний прозорий 200 м
+                        </div>
                         <div class="item-sku">Код: <span>001</span></div>
                         <div class="item-desc">Надійний вибір для інтенсивного пакування. Стійкий до розриву. Гарантує безпеку вантажу.</div>
                         <div class="item-specs"><p>📏 200 м х 45 мм</p><p>📦 В ящику: 36 шт</p></div>
@@ -148,9 +173,21 @@
 
                 <!-- Товар 3: 300 м -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/300.jpeg" alt="Скотч 300м"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч пакувальний прозорий 300 м"
+                         data-price="60"
+                         data-boxqty="36"
+                         data-sku="002"
+                         data-img="images/300.jpeg"
+                         data-desc="Максимальна намотка для інтенсивного складу. Гарантує економічність та довготривале використання без необхідності постійних закупівель."
+                         data-advantages="Максимальна довжина в рулоні для великих обсягів робіт|Вигідна ціна за метр стрічки|Стійкість до перепадів температур та вологи"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Тип: Прозорий | Довжина: 300 м | Ширина: 45 мм | Товщина: 40 мкм" style="cursor: pointer;">
+                        <img src="images/300.jpeg" alt="Скотч 300м">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч пакувальний прозорий 300 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч пакувальний прозорий 300 м
+                        </div>
                         <div class="item-sku">Код: <span>002</span></div>
                         <div class="item-desc">Максимальна намотка для інтенсивного складу. Гарантує економічність та довготривале використання.</div>
                         <div class="item-specs"><p>📏 300 м х 45 мм</p><p>📦 В ящику: 36 шт</p></div>
@@ -165,9 +202,21 @@
 
                 <!-- Товар 4: Широкий 72 мм -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/72.jpg" alt="Скотч широкий 72мм"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч пакувальний Широкий 200 м"
+                         data-price="70"
+                         data-boxqty="24"
+                         data-sku="033"
+                         data-img="images/72.jpg"
+                         data-desc="Посилена фіксація завдяки збільшеній ширині (72 мм). Ідеально підходить для важких та великогабаритних вантажів і гофрокартону."
+                         data-advantages="Збільшена ширина для надійного закріплення важких коробок|Міцна клейова основа суттєво покращує фіксацію|Стійкість до механічних пошкоджень"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Тип: Посилений | Довжина: 200 м | Ширина: 72 мм | Товщина: 45 мкм" style="cursor: pointer;">
+                        <img src="images/72.jpg" alt="Скотч широкий 72мм">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч пакувальний Широкий 200 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч пакувальний Широкий 200 м
+                        </div>
                         <div class="item-sku">Код: <span>033</span></div>
                         <div class="item-desc">Посилена фіксація завдяки збільшеній ширині. Ідеально підходить для важких та великогабаритних вантажів.</div>
                         <div class="item-specs"><p>📏 200 м х 72 мм</p><p>📦 В ящику: 24 шт</p></div>
@@ -199,6 +248,5 @@
     </div>
 
     <script src="cart.js"></script>
-
 </body>
 </html>
