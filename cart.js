@@ -14,7 +14,7 @@ function injectCartHTML() {
 
             <div class="checkout-scroll-body">
                 
-                <!-- ЕТАП 1: Кошик з двома кнопками -->
+                <!-- ЕТАП 1: Кошик -->
                 <div id="cartStep1">
                     <div class="section-title-num">🛒 Ваш кошик замовлень</div>
                     <div class="cart-items-list" id="cartItemsList"></div>
@@ -129,6 +129,34 @@ function injectCartHTML() {
             </div>
         </div>
     </div>
+    
+    <!-- Модальне вікно продукту -->
+    <div id="productModal" class="cart-modal" style="display: none;">
+        <div class="cart-modal-content-large" style="max-width: 750px;">
+            <div class="checkout-top-bar">
+                <h2 id="modalProductTitle" style="font-size: 1.15rem; font-weight: 700;">Деталі товару</h2>
+                <button class="close-cart" onclick="closeProductModal()">&times;</button>
+            </div>
+            <div class="checkout-scroll-body" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; align-items: start;">
+                <!-- Блок картинки с безопасным зумом -->
+                <div style="background: #FFFFFF; padding: 15px; border-radius: 8px; border: 1px solid #E5E7EB; text-align: center; overflow: hidden;">
+                    <img id="modalProductImg" src="" alt="" style="max-height: 250px; max-width: 100%; border-radius: 6px; object-fit: contain; transition: transform 0.4s ease; cursor: zoom-in; transform-origin: center center; user-select: none; -webkit-user-drag: none;" 
+     onmouseenter="this.style.transform='scale(1.6)'" 
+     onmouseleave="this.style.transform='scale(1)'">
+                </div>
+                <div>
+                    <div style="color: #059669; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">✔ Готово до відправки</div>
+                    <div id="modalProductSku" style="font-size: 0.85rem; color: #9CA3AF; margin-bottom: 10px;"></div>
+                    <div id="modalProductDesc" style="font-size: 0.9rem; color: #4B5563; line-height: 1.5; margin-bottom: 15px;"></div>
+                    <div id="modalProductSpecs" style="background: #FFFFFF; padding: 12px; border-radius: 8px; border: 1px solid #E5E7EB; margin-bottom: 15px; font-size: 0.9rem; color: #374151;"></div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; padding: 12px 15px; border-radius: 8px; border: 1px solid #E5E7EB;">
+                        <div id="modalProductPrice" style="font-size: 1.2rem; font-weight: 700; color: #111827;"></div>
+                        <button id="modalBuyBtn" class="btn-buy" style="padding: 10px 20px; font-size: 0.95rem; width: auto;">Купити</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     `;
     
     document.body.insertAdjacentHTML('beforeend', cartHTML);
@@ -139,9 +167,7 @@ function saveCart() {
     updateCartUI();
 }
 
-// ДОБАВЛЕН ПАРАМЕТР sku
 function addToCart(name, pricePerItem, boxQty, sku = '') {
-    // Ищем товар не только по имени, но и по коду
     let existingItem = cart.find(item => item.name === name || (item.sku === sku && sku !== ''));
     if (existingItem) {
         existingItem.boxes += 1;
@@ -190,7 +216,6 @@ function updateCartUI() {
         let totalPieces = item.boxQty * item.boxes;
         totalPrice += itemTotal;
 
-        // Формируем красивый вывод кода товара
         let skuDisplay = item.sku ? `<span style="color: #6B7280; font-size: 0.85rem; margin-left: 8px;">(Код: ${item.sku})</span>` : '';
 
         html += `
@@ -258,38 +283,93 @@ function submitOrder() {
         return;
     }
 
-    // Сбор всех товаров из корзины с кодами (SKU)
     let orderDetailsList = cart.map(item => {
         let boxPrice = item.pricePerItem * item.boxQty;
-        return `📦 ${item.name} (Код: ${item.sku || 'Немає'})\n   ${item.boxes} ящ. x ${boxPrice} ₴ = ${item.boxes * boxPrice} ₴`;
+        return `📦 ${item.name} (Код: ${item.sku || 'Немає'})\n    ${item.boxes} ящ. x ${boxPrice} ₴ = ${item.boxes * boxPrice} ₴`;
     }).join('\n');
 
     let totalPrice = cart.reduce((sum, item) => sum + (item.pricePerItem * item.boxQty * item.boxes), 0);
     
     let commentText = comment ? `\nКоментар: ${comment}` : '';
 
-    // Формируем текст финального сообщения
     let finalMessage = `✅ НОВЕ ЗАМОВЛЕННЯ\n\n` +
-                       `👤 Клієнт: ${lastName} ${firstName}\n` +
-                       `📞 Телефон: ${phone}\n` +
-                       `🚚 Доставка: НП, м. ${city}, ${warehouse}\n` +
-                       `💳 Оплата: ${payment}${commentText}\n\n` +
-                       `🛒 ТОВАРИ:\n${orderDetailsList}\n\n` +
-                       `💰 ЗАГАЛЬНА СУМА: ${totalPrice} ₴`;
+                        `👤 Клієнт: ${lastName} ${firstName}\n` +
+                        `📞 Телефон: ${phone}\n` +
+                        `🚚 Доставка: НП, м. ${city}, ${warehouse}\n` +
+                        `💳 Оплата: ${payment}${commentText}\n\n` +
+                        `🛒 ТОВАРИ:\n${orderDetailsList}\n\n` +
+                        `💰 ЗАГАЛЬНА СУМА: ${totalPrice} ₴`;
 
-    // Пока выводим в Alert. Позже этот текст легко передать в Telegram Bot.
     alert(finalMessage);
     
-    // Очистка корзины после успешного оформления
     cart = [];
     saveCart();
     closeCartModal();
 }
 
+function openProductModalFromCard(element) {
+    let title = element.getAttribute('data-title');
+    let price = element.getAttribute('data-price');
+    let boxQty = element.getAttribute('data-boxqty');
+    let sku = element.getAttribute('data-sku');
+    let img = element.getAttribute('data-img');
+    let desc = element.getAttribute('data-desc');
+    let advantagesStr = element.getAttribute('data-advantages');
+    let specs = element.getAttribute('data-specs');
+
+    let imgElem = document.getElementById('modalProductImg');
+    // Сбрасываем масштаб при открытии нового товара
+    imgElem.style.transform = 'scale(1)';
+    imgElem.src = img;
+
+    document.getElementById('modalProductTitle').innerText = title;
+    document.getElementById('modalProductPrice').innerHTML = price + ' грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span>';
+    document.getElementById('modalProductSku').innerHTML = 'Код: <b>' + sku + '</b>';
+
+    let fullDescHtml = '<p style="margin-bottom: 10px;">' + desc + '</p>';
+    if (advantagesStr) {
+        fullDescHtml += '<div style="font-weight: 600; margin-bottom: 5px; color: #111827;">Переваги:</div><ul style="margin: 0; padding-left: 18px; color: #4B5563;">';
+        advantagesStr.split('|').forEach(adv => {
+            fullDescHtml += '<li style="margin-bottom: 3px;">' + adv.trim() + '</li>';
+        });
+        fullDescHtml += '</ul>';
+    }
+    document.getElementById('modalProductDesc').innerHTML = fullDescHtml;
+    
+    let specsHtml = '<div style="font-weight: 600; margin-bottom: 6px; color: #111827;">Характеристики:</div>';
+    if (specs) {
+        specs.split('|').forEach(sp => {
+            specsHtml += '<p style="margin-bottom: 4px;">• ' + sp.trim() + '</p>';
+        });
+    }
+    specsHtml += '<p style="margin-bottom: 0; margin-top: 4px;">📦 В ящику: <b>' + boxQty + ' шт</b></p>';
+    document.getElementById('modalProductSpecs').innerHTML = specsHtml;
+
+    let buyBtn = document.getElementById('modalBuyBtn');
+    buyBtn.onclick = function() {
+        addToCart(title, Number(price), Number(boxQty), sku);
+        closeProductModal();
+    };
+
+    document.getElementById('productModal').style.display = 'flex';
+}
+
+function closeProductModal() {
+    let modal = document.getElementById('productModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
 window.onclick = function(event) {
-    let modal = document.getElementById('cartModal');
-    if (event.target === modal) {
+    let cartModal = document.getElementById('cartModal');
+    let productModal = document.getElementById('productModal');
+    
+    if (event.target === cartModal) {
         closeCartModal();
+    }
+    if (event.target === productModal) {
+        closeProductModal();
     }
 }
 
