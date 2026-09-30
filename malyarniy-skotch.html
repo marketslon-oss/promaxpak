@@ -57,6 +57,10 @@
         .cart-wrapper { position: relative; display: flex; align-items: center; text-decoration: none; transition: transform 0.2s; cursor: pointer; }
         .cart-wrapper:hover { transform: scale(1.1); }
         .cart-counter { position: absolute; top: -8px; right: -10px; background-color: #EF4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; min-width: 20px; text-align: center; }
+        
+        .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
+        .item-sku span { color: #4B5563; font-weight: 700; }
+        .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
     </style>
 </head>
 <body>
@@ -88,78 +92,86 @@
         <aside class="sidebar">
             <h3>Каталог продукції</h3>
             <nav class="category-menu">
-    <a href="skotch.html">Скотч пакувальний</a>
-    <a href="color-skotch.html">Скотч кольоровий</a>
-    <a href="office-skotch.html">Скотч канцелярський</a>
-    <a href="logo-skotch.html">Скотч з логотипом</a>
-    <a href="reinforced-skotch.html">Скотч армований</a>
-    <a href="malyarniy-skotch.html"class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч малярський</a>
-    <a href="stretch-prozoriy.html">Стрейч прозорий</a>
-    <a href="stretch-cherniy.html">Стрейч чорний</a>
-    <a href="#">Харчова плівка</a>
-    <a href="trash-bags.html">Пакети для сміття</a>
-    <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
-    <a href="#">Рукавиці робочі</a>
-</nav>
+                <a href="skotch.html">Скотч пакувальний</a>
+                <a href="color-skotch.html">Скотч кольоровий</a>
+                <a href="office-skotch.html">Скотч канцелярський</a>
+                <a href="logo-skotch.html">Скотч з логотипом</a>
+                <a href="reinforced-skotch.html">Скотч армований</a>
+                <a href="malyarniy-skotch.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч малярський</a>
+                <a href="stretch-prozoriy.html">Стрейч прозорий</a>
+                <a href="stretch-cherniy.html">Стрейч чорний</a>
+                <a href="#">Харчова плівка</a>
+                <a href="trash-bags.html">Пакети для сміття</a>
+                <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
+                <a href="#">Рукавиці робочі</a>
+            </nav>
         </aside>
 
         <main class="content-area">
             <div class="product-grid">
                 
-                <!-- Товар 1 -->
+                <!-- Товар 1: 24 мм -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Малярка24.jpg" alt="Скотч малярський 24мм білий/жовтий"></div>
+                    <div class="card-image"><img src="images/Малярка24.jpg" alt="Скотч малярський 24мм"></div>
                     <div class="item-info">
-                        <div class="item-title">Скотч малярський білий/жовтий 24 мм х 20 м</div>
+                        <div class="item-title">Скотч малярський білий/жовтий</div>
+                        <div class="item-sku">Код: <span>016</span></div>
+                        <div class="item-desc">Тонка паперова стрічка для точних малярних робіт. Легко видаляється, не залишаючи слідів клею.</div>
                         <div class="item-specs"><p>📏 24 мм х 20 м</p><p>📦 В ящику: 108 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">14 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч малярський білий/жовтий 24 мм х 20 м', 14, 108)">
+                            <button class="btn-buy" onclick="addToCart('Скотч малярський 24 мм х 20 м (Код: 016)', 14, 108)">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 2 -->
+                <!-- Товар 2: 30 мм -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Малярка30.jpg" alt="Скотч малярський 30мм білий/жовтий"></div>
+                    <div class="card-image"><img src="images/Малярка30.jpg" alt="Скотч малярський 30мм"></div>
                     <div class="item-info">
-                        <div class="item-title">Скотч малярський білий/жовтий 30 мм х 20 м</div>
+                        <div class="item-title">Скотч малярський білий/жовтий</div>
+                        <div class="item-sku">Код: <span>017</span></div>
+                        <div class="item-desc">Зручний формат для побутових та будівельних робіт. Надійно захищає поверхні при фарбуванні.</div>
                         <div class="item-specs"><p>📏 30 мм х 20 м</p><p>📦 В ящику: 90 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">17 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч малярський білий/жовтий 30 мм х 20 м', 17, 90)">
+                            <button class="btn-buy" onclick="addToCart('Скотч малярський 30 мм х 20 м (Код: 017)', 17, 90)">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 3 -->
+                <!-- Товар 3: 48 на 20 -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Малярка48на20.jpg" alt="Скотч малярський 48х20 білий/жовтий"></div>
+                    <div class="card-image"><img src="images/Малярка48на20.jpg" alt="Скотч малярський 48х20"></div>
                     <div class="item-info">
-                        <div class="item-title">Скотч малярський білий/жовтий 48 мм х 20 м</div>
+                        <div class="item-title">Скотч малярський білий/жовтий</div>
+                        <div class="item-sku">Код: <span>019</span></div>
+                        <div class="item-desc">Широка паперова стрічка для захисту великих площ під час штукатурних та малярних процедур.</div>
                         <div class="item-specs"><p>📏 48 мм х 20 м</p><p>📦 В ящику: 54 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">28 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч малярський білий/жовтий 48 мм х 20 м', 28, 54)">
+                            <button class="btn-buy" onclick="addToCart('Скотч малярський 48 мм х 20 м (Код: 019)', 28, 54)">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 4 -->
+                <!-- Товар 4: 48 на 40 -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Малярка48на40.jpg" alt="Скотч малярський 48х40 білий/жовтий"></div>
+                    <div class="card-image"><img src="images/Малярка48на40.jpg" alt="Скотч малярський 48х40"></div>
                     <div class="item-info">
-                        <div class="item-title">Скотч малярський білий/жовтий 48 мм х 40 м</div>
+                        <div class="item-title">Скотч малярський білий/жовтий</div>
+                        <div class="item-sku">Код: <span>020</span></div>
+                        <div class="item-desc">Збільшена намотка для професійного ремонту. Економічний рулон для тривалих будівельних робіт.</div>
                         <div class="item-specs"><p>📏 48 мм х 40 м</p><p>📦 В ящику: 36 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">51 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч малярський білий/жовтий 48 мм х 40 м', 51, 36)">
+                            <button class="btn-buy" onclick="addToCart('Скотч малярський 48 мм х 40 м (Код: 020)', 51, 36)">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
@@ -185,6 +197,5 @@
     </div>
 
     <script src="cart.js"></script>
-
 </body>
 </html>
