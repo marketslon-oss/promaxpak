@@ -4,8 +4,30 @@ function injectCartHTML() {
     if (document.getElementById('cartModal')) return; 
 
     const cartHTML = `
+    <!-- Добавляем стили адаптива прямо при инжекте, чтобы они гарантированно работали на всех страницах -->
+    <style>
+        .product-modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 20px;
+            align-items: start;
+        }
+        @media (max-width: 768px) {
+            .product-modal-grid {
+                grid-template-columns: 1fr !important;
+                gap: 15px;
+            }
+            .cart-modal-content-large {
+                max-width: 100% !important;
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0 !important;
+            }
+        }
+    </style>
+
     <div class="cart-modal" id="cartModal" style="display: none;">
-        <div class="cart-modal-content-large">
+        <div class="cart-modal-content-large" style="max-width: 750px;">
             
             <div class="checkout-top-bar">
                 <h2>Оформлення замовлення</h2>
@@ -130,19 +152,20 @@ function injectCartHTML() {
         </div>
     </div>
     
-    <!-- Модальне вікно продукту -->
+    <!-- Адаптивне модальне вікно продукту -->
     <div id="productModal" class="cart-modal" style="display: none;">
         <div class="cart-modal-content-large" style="max-width: 750px;">
             <div class="checkout-top-bar">
                 <h2 id="modalProductTitle" style="font-size: 1.15rem; font-weight: 700;">Деталі товару</h2>
                 <button class="close-cart" onclick="closeProductModal()">&times;</button>
             </div>
-            <div class="checkout-scroll-body" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; align-items: start;">
-                <!-- Блок картинки с безопасным зумом -->
+            <!-- Используем класс product-modal-grid для автоматического переключения в 1 колонку на мобильных -->
+            <div class="checkout-scroll-body product-modal-grid">
+                <!-- Блок картинки с безопасным зумом и защитой от зависаний при перетаскивании -->
                 <div style="background: #FFFFFF; padding: 15px; border-radius: 8px; border: 1px solid #E5E7EB; text-align: center; overflow: hidden;">
                     <img id="modalProductImg" src="" alt="" style="max-height: 250px; max-width: 100%; border-radius: 6px; object-fit: contain; transition: transform 0.4s ease; cursor: zoom-in; transform-origin: center center; user-select: none; -webkit-user-drag: none;" 
-     onmouseenter="this.style.transform='scale(1.6)'" 
-     onmouseleave="this.style.transform='scale(1)'">
+                         onmouseenter="this.style.transform='scale(1.6)'" 
+                         onmouseleave="this.style.transform='scale(1)'">
                 </div>
                 <div>
                     <div style="color: #059669; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">✔ Готово до відправки</div>
@@ -318,7 +341,6 @@ function openProductModalFromCard(element) {
     let specs = element.getAttribute('data-specs');
 
     let imgElem = document.getElementById('modalProductImg');
-    // Сбрасываем масштаб при открытии нового товара
     imgElem.style.transform = 'scale(1)';
     imgElem.src = img;
 
