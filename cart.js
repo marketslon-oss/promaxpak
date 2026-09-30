@@ -20,6 +20,24 @@ function injectCartHTML() {
             overflow: hidden;
             width: 100%;
             box-sizing: border-box;
+            
+            /* ЗАЩИТА ОТ СПЛЮЩИВАНИЯ НА МОБИЛЬНОМ */
+            flex-shrink: 0; 
+            min-height: 250px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-product-image {
+            max-height: 230px; 
+            max-width: 100%; 
+            border-radius: 6px; 
+            object-fit: contain; 
+            transition: transform 0.4s ease; 
+            cursor: zoom-in; 
+            transform-origin: center center; 
+            user-select: none; 
+            -webkit-user-drag: none;
         }
         @media (max-width: 768px) {
             .product-modal-grid {
@@ -35,6 +53,12 @@ function injectCartHTML() {
             }
             .checkout-scroll-body {
                 padding: 15px;
+            }
+            .product-modal-img-box {
+                min-height: 280px; /* Даем картинке больше места на телефоне */
+            }
+            .modal-product-image {
+                max-height: 260px;
             }
         }
     </style>
@@ -172,10 +196,11 @@ function injectCartHTML() {
                 <h2 id="modalProductTitle" style="font-size: 1.15rem; font-weight: 700;">Деталі товару</h2>
                 <button class="close-cart" onclick="closeProductModal()">&times;</button>
             </div>
+            
             <div class="checkout-scroll-body product-modal-grid">
                 
                 <div class="product-modal-img-box">
-                    <img id="modalProductImg" src="" alt="" style="max-height: 250px; max-width: 100%; border-radius: 6px; object-fit: contain; transition: transform 0.4s ease; cursor: zoom-in; transform-origin: center center; user-select: none; -webkit-user-drag: none;" 
+                    <img id="modalProductImg" class="modal-product-image" src="" alt="" 
                          onmouseenter="this.style.transform='scale(1.6)'" 
                          onmouseleave="this.style.transform='scale(1)'">
                 </div>
