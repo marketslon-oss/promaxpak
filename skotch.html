@@ -57,9 +57,15 @@
         .cart-wrapper { position: relative; display: flex; align-items: center; text-decoration: none; transition: transform 0.2s; cursor: pointer; }
         .cart-wrapper:hover { transform: scale(1.1); }
         .cart-counter { position: absolute; top: -8px; right: -10px; background-color: #EF4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; min-width: 20px; text-align: center; }
+        
+        /* Класи для красивого опису і коду */
+        .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
+        .item-sku span { color: #4B5563; font-weight: 700; }
+        .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
     </style>
 </head>
 <body>
+
     <header class="top-header">
         <div class="logo-placeholder">
             <a href="index.html" class="logo-link">
@@ -67,13 +73,17 @@
                 <span class="logo-tagline">ваш партнер надійного пакування</span>
             </a>
         </div>
+        
         <nav class="main-nav">
             <a href="index.html">Головна</a>
             <a href="#">Про нас</a>
             <a href="#">Доставка та оплата</a>
             <a href="#">Контакти</a>
+            
             <a onclick="openCartModal()" class="cart-wrapper" title="Кошик">
-                <svg fill="white" viewBox="0 0 24 24" width="26" height="26"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                <svg fill="white" viewBox="0 0 24 24" width="26" height="26">
+                    <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
                 <span class="cart-counter" id="cart-badge">0</span>
             </a>
         </nav>
@@ -83,9 +93,8 @@
         <aside class="sidebar">
             <h3>Каталог продукції</h3>
             <nav class="category-menu">
-                <!-- АКТИВНИЙ КЛАС ТА СТИЛЬ СТОЯТЬ ТУТ, БО ЦЕ СТОРІНКА ПАКУВАЛЬНОГО СКОТЧУ -->
+                <!-- Активний клас на Пакувальному скотчі -->
                 <a href="skotch.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч пакувальний</a>
-                
                 <a href="color-skotch.html">Скотч кольоровий</a>
                 <a href="office-skotch.html">Скотч канцелярський</a>
                 <a href="logo-skotch.html">Скотч з логотипом</a>
@@ -103,65 +112,74 @@
         <main class="content-area">
             <div class="product-grid">
                 
-                <!-- Товар 1 -->
+                <!-- Товар 1: 100 м -->
                 <div class="item-card">
                     <div class="card-image"><img src="images/100.jpeg" alt="Скотч 100м"></div>
                     <div class="item-info">
-                        <div class="item-title">Скотч пакувальний прозорий Міцний</div>
+                        <div class="item-title">Скотч пакувальний прозорий 100 м</div>
+                        <div class="item-sku">Код: <span>003</span></div>
+                        <div class="item-desc">Оптимальний вибір для пакування коробок середньої ваги. Забезпечує високу клейкість та надійність.</div>
                         <div class="item-specs"><p>📏 100 м х 45 мм</p><p>📦 В ящику: 72 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">25 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний 100 м х 45 мм', 25, 72)">
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний 100 м х 45 мм', 25, 72, '003')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 2 -->
+                <!-- Товар 2: 200 м -->
                 <div class="item-card">
                     <div class="card-image"><img src="images/200.jpeg" alt="Скотч 200м"></div>
                     <div class="item-info">
-                        <div class="item-title">Скотч пакувальний прозорий Міцний</div>
+                        <div class="item-title">Скотч пакувальний прозорий 200 м</div>
+                        <div class="item-sku">Код: <span>001</span></div>
+                        <div class="item-desc">Надійний вибір для інтенсивного пакування. Стійкий до розриву. Гарантує безпеку вантажу.</div>
                         <div class="item-specs"><p>📏 200 м х 45 мм</p><p>📦 В ящику: 36 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">45 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний 200 м х 45 мм', 45, 36)">
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний 200 м х 45 мм', 45, 36, '001')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 3 -->
+                <!-- Товар 3: 300 м -->
                 <div class="item-card">
                     <div class="card-image"><img src="images/300.jpeg" alt="Скотч 300м"></div>
                     <div class="item-info">
-                        <div class="item-title">Скотч пакувальний прозорий Міцний</div>
+                        <div class="item-title">Скотч пакувальний прозорий 300 м</div>
+                        <div class="item-sku">Код: <span>002</span></div>
+                        <div class="item-desc">Максимальна намотка для інтенсивного складу. Гарантує економічність та довготривале використання.</div>
                         <div class="item-specs"><p>📏 300 м х 45 мм</p><p>📦 В ящику: 36 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">60 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний 300 м х 45 мм', 60, 36)">
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний 300 м х 45 мм', 60, 36, '002')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 4 -->
+                <!-- Товар 4: Широкий 72 мм -->
                 <div class="item-card">
                     <div class="card-image"><img src="images/72.jpg" alt="Скотч широкий 72мм"></div>
                     <div class="item-info">
-                        <div class="item-title">Скотч пакувальний прозорий Міцний Широкий</div>
+                        <div class="item-title">Скотч пакувальний Широкий 200 м</div>
+                        <div class="item-sku">Код: <span>033</span></div>
+                        <div class="item-desc">Посилена фіксація завдяки збільшеній ширині. Ідеально підходить для важких та великогабаритних вантажів.</div>
                         <div class="item-specs"><p>📏 200 м х 72 мм</p><p>📦 В ящику: 24 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">70 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний широкий 200 м х 72 мм', 70, 24)">
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний широкий 200 м х 72 мм', 70, 24, '033')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </main>
     </div>
@@ -169,13 +187,18 @@
     <!-- Плаваючі кнопки зв'язку -->
     <div class="floating-buttons">
         <a href="tel:+380000000000" class="float-btn" title="Зателефонувати нам">
-            <svg fill="white" viewBox="0 0 24 24" width="28" height="28"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            <svg fill="white" viewBox="0 0 24 24" width="28" height="28">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
         </a>
         <a href="https://t.me/ваш_телеграм" target="_blank" class="float-btn" title="Написати в месенджер">
-            <svg fill="white" viewBox="0 0 24 24" width="28" height="28"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+            <svg fill="white" viewBox="0 0 24 24" width="28" height="28">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+            </svg>
         </a>
     </div>
 
     <script src="cart.js"></script>
+
 </body>
 </html>
