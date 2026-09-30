@@ -4,7 +4,6 @@ function injectCartHTML() {
     if (document.getElementById('cartModal')) return; 
 
     const cartHTML = `
-    <!-- Добавляем стили адаптива прямо при инжекте, чтобы они гарантированно работали на всех страницах -->
     <style>
         .product-modal-grid {
             display: grid;
@@ -12,16 +11,30 @@ function injectCartHTML() {
             gap: 20px;
             align-items: start;
         }
+        .product-modal-img-box {
+            background: #FFFFFF;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            text-align: center;
+            overflow: hidden;
+            width: 100%;
+            box-sizing: border-box;
+        }
         @media (max-width: 768px) {
             .product-modal-grid {
-                grid-template-columns: 1fr !important;
-                gap: 15px;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 15px !important;
             }
             .cart-modal-content-large {
                 max-width: 100% !important;
                 height: 100vh;
                 max-height: 100vh;
                 border-radius: 0 !important;
+            }
+            .checkout-scroll-body {
+                padding: 15px;
             }
         }
     </style>
@@ -159,14 +172,14 @@ function injectCartHTML() {
                 <h2 id="modalProductTitle" style="font-size: 1.15rem; font-weight: 700;">Деталі товару</h2>
                 <button class="close-cart" onclick="closeProductModal()">&times;</button>
             </div>
-            <!-- Используем класс product-modal-grid для автоматического переключения в 1 колонку на мобильных -->
             <div class="checkout-scroll-body product-modal-grid">
-                <!-- Блок картинки с безопасным зумом и защитой от зависаний при перетаскивании -->
-                <div style="background: #FFFFFF; padding: 15px; border-radius: 8px; border: 1px solid #E5E7EB; text-align: center; overflow: hidden;">
+                
+                <div class="product-modal-img-box">
                     <img id="modalProductImg" src="" alt="" style="max-height: 250px; max-width: 100%; border-radius: 6px; object-fit: contain; transition: transform 0.4s ease; cursor: zoom-in; transform-origin: center center; user-select: none; -webkit-user-drag: none;" 
                          onmouseenter="this.style.transform='scale(1.6)'" 
                          onmouseleave="this.style.transform='scale(1)'">
                 </div>
+                
                 <div>
                     <div style="color: #059669; font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">✔ Готово до відправки</div>
                     <div id="modalProductSku" style="font-size: 0.85rem; color: #9CA3AF; margin-bottom: 10px;"></div>
@@ -174,7 +187,7 @@ function injectCartHTML() {
                     <div id="modalProductSpecs" style="background: #FFFFFF; padding: 12px; border-radius: 8px; border: 1px solid #E5E7EB; margin-bottom: 15px; font-size: 0.9rem; color: #374151;"></div>
                     <div style="display: flex; justify-content: space-between; align-items: center; background: #FFFFFF; padding: 12px 15px; border-radius: 8px; border: 1px solid #E5E7EB;">
                         <div id="modalProductPrice" style="font-size: 1.2rem; font-weight: 700; color: #111827;"></div>
-                        <button id="modalBuyBtn" class="btn-buy" style="padding: 10px 20px; font-size: 0.95rem; width: auto;">Купити</button>
+                        <button id="modalBuyBtn" class="btn-buy" style="padding: 10px 20px; font-size: 0.95rem; width: auto; background-color: #3B71CA; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Купити</button>
                     </div>
                 </div>
             </div>
@@ -352,7 +365,9 @@ function openProductModalFromCard(element) {
     if (advantagesStr) {
         fullDescHtml += '<div style="font-weight: 600; margin-bottom: 5px; color: #111827;">Переваги:</div><ul style="margin: 0; padding-left: 18px; color: #4B5563;">';
         advantagesStr.split('|').forEach(adv => {
-            fullDescHtml += '<li style="margin-bottom: 3px;">' + adv.trim() + '</li>';
+            if(adv.trim() !== "") {
+                fullDescHtml += '<li style="margin-bottom: 3px;">' + adv.trim() + '</li>';
+            }
         });
         fullDescHtml += '</ul>';
     }
@@ -361,7 +376,9 @@ function openProductModalFromCard(element) {
     let specsHtml = '<div style="font-weight: 600; margin-bottom: 6px; color: #111827;">Характеристики:</div>';
     if (specs) {
         specs.split('|').forEach(sp => {
-            specsHtml += '<p style="margin-bottom: 4px;">• ' + sp.trim() + '</p>';
+            if(sp.trim() !== "") {
+                specsHtml += '<p style="margin-bottom: 4px;">• ' + sp.trim() + '</p>';
+            }
         });
     }
     specsHtml += '<p style="margin-bottom: 0; margin-top: 4px;">📦 В ящику: <b>' + boxQty + ' шт</b></p>';
