@@ -91,6 +91,13 @@
         .cart-wrapper { position: relative; display: flex; align-items: center; text-decoration: none; transition: transform 0.2s; cursor: pointer; }
         .cart-wrapper:hover { transform: scale(1.1); }
         .cart-counter { position: absolute; top: -8px; right: -10px; background-color: #EF4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; min-width: 20px; text-align: center; }
+
+        .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
+        .item-sku span { color: #4B5563; font-weight: 700; }
+        .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
+        
+        .card-image img, .item-title { cursor: pointer; transition: opacity 0.2s; }
+        .card-image img:hover, .item-title:hover { opacity: 0.85; }
     </style>
 </head>
 <body>
@@ -122,19 +129,19 @@
         <aside class="sidebar">
             <h3>Каталог продукції</h3>
             <nav class="category-menu">
-    <a href="skotch.html">Скотч пакувальний</a>
-    <a href="color-skotch.html">Скотч кольоровий</a>
-    <a href="office-skotch.html">Скотч канцелярський</a>
-    <a href="logo-skotch.html">Скотч з логотипом</a>
-    <a href="reinforced-skotch.html"class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч армований</a>
-    <a href="malyarniy-skotch.html">Скотч малярський</a>
-    <a href="stretch-prozoriy.html">Стрейч прозорий</a>
-    <a href="stretch-cherniy.html">Стрейч чорний</a>
-    <a href="#">Харчова плівка</a>
-    <a href="trash-bags.html">Пакети для сміття</a>
-    <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
-    <a href="#">Рукавиці робочі</a>
-</nav>
+                <a href="skotch.html">Скотч пакувальний</a>
+                <a href="color-skotch.html">Скотч кольоровий</a>
+                <a href="office-skotch.html">Скотч канцелярський</a>
+                <a href="logo-skotch.html">Скотч з логотипом</a>
+                <a href="reinforced-skotch.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч армований</a>
+                <a href="malyarniy-skotch.html">Скотч малярський</a>
+                <a href="stretch-prozoriy.html">Стрейч прозорий</a>
+                <a href="stretch-cherniy.html">Стрейч чорний</a>
+                <a href="#">Харчова плівка</a>
+                <a href="trash-bags.html">Пакети для сміття</a>
+                <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
+                <a href="#">Рукавиці робочі</a>
+            </nav>
         </aside>
 
         <main class="content-area">
@@ -142,13 +149,27 @@
                 
                 <!-- Скотч армований Сірий -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Аромований сірий.jpg" alt="Скотч армований сірий"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч армований Сірий 48 мм х 50 м"
+                         data-price="91"
+                         data-boxqty="36"
+                         data-sku="040"
+                         data-img="images/Аромований сірий.jpg"
+                         data-desc="Міцний армований скотч чудово підходить для пакування важких коробок, фіксації вантажів, ремонту та будівельних робіт. Посилена структура забезпечує надійність і довговічність навіть за високих навантажень."
+                         data-advantages="Підвищена міцність завдяки армованій основі|Стійкість до розтягування і розриву|Універсальне застосування: пакування, ремонт, монтаж|Зручна ширина для надійної фіксації"
+                         data-specs="Довжина: 50 м | Ширина: 48 мм | Товщина: 150 мкм | Упаковка: ящик 36 шт | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Аромований сірий.jpg" alt="Скотч армований сірий">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч армований Сірий</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч армований Сірий
+                        </div>
+                        <div class="item-sku">Код: <span>040</span></div>
+                        <div class="item-desc">Міцний армований скотч чудово підходить для пакування важких коробок, фіксації вантажів та ремонту.</div>
                         <div class="item-specs"><p>📏 48 мм х 50 м</p><p>📦 В ящику: 36 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">91 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч армований Сірий 48 мм х 50 м', 91, 36)">
+                            <button class="btn-buy" onclick="addToCart('Скотч армований Сірий 48 мм х 50 м', 91, 36, '040')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
@@ -157,13 +178,27 @@
 
                 <!-- Скотч армований Чорний -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Аромваний Чорний.jpg" alt="Скотч армований чорний міцний"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч армований Чорний Міцний 48 мм х 50 м"
+                         data-price="91"
+                         data-boxqty="36"
+                         data-sku="041"
+                         data-img="images/Аромваний Чорний.jpg"
+                         data-desc="Міцний армований скотч чудово підходить для пакування важких коробок, фіксації вантажів, ремонту та будівельних робіт. Посилена структура забезпечує надійність і довговічність навіть за високих навантажень."
+                         data-advantages="Підвищена міцність завдяки армованій основі|Стійкість до розтягування і розриву|Універсальне застосування: пакування, ремонт, монтаж|Зручна ширина для надійної фіксації"
+                         data-specs="Довжина: 50 м | Ширина: 48 мм | Товщина: 150 мкм | Упаковка: ящик 36 шт | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Аромваний Чорний.jpg" alt="Скотч армований чорний міцний">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч армований Чорний Міцний</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч армований Чорний Міцний
+                        </div>
+                        <div class="item-sku">Код: <span>041</span></div>
+                        <div class="item-desc">Міцний армований скотч чудово підходить для пакування важких коробок, фіксації вантажів та ремонту.</div>
                         <div class="item-specs"><p>📏 48 мм х 50 м</p><p>📦 В ящику: 36 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">91 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч армований Чорний 48 мм х 50 м', 91, 36)">
+                            <button class="btn-buy" onclick="addToCart('Скотч армований Чорний 48 мм х 50 м', 91, 36, '041')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
