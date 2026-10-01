@@ -61,6 +61,9 @@
         .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
         .item-sku span { color: #4B5563; font-weight: 700; }
         .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
+
+        .card-image img, .item-title { cursor: pointer; transition: opacity 0.2s; }
+        .card-image img:hover, .item-title:hover { opacity: 0.85; }
     </style>
 </head>
 <body>
@@ -91,20 +94,20 @@
     <div class="catalog-layout">
         <aside class="sidebar">
             <h3>Каталог продукції</h3>
-          <nav class="category-menu">
-    <a href="skotch.html">Скотч пакувальний</a>
-    <a href="color-skotch.html">Скотч кольоровий</a>
-    <a href="office-skotch.html">Скотч канцелярський</a>
-    <a href="logo-skotch.html">Скотч з логотипом</a>
-    <a href="reinforced-skotch.html">Скотч армований</a>
-    <a href="malyarniy-skotch.html">Скотч малярський</a>
-    <a href="stretch-prozoriy.html">Стрейч прозорий</a>
-    <a href="stretch-cherniy.html">Стрейч чорний</a>
-    <a href="#">Харчова плівка</a>
-    <a href="trash-bags.html"class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Пакети для сміття</a>
-    <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
-    <a href="#">Рукавиці робочі</a>
-</nav>
+            <nav class="category-menu">
+                <a href="skotch.html">Скотч пакувальний</a>
+                <a href="color-skotch.html">Скотч кольоровий</a>
+                <a href="office-skotch.html">Скотч канцелярський</a>
+                <a href="logo-skotch.html">Скотч з логотипом</a>
+                <a href="reinforced-skotch.html">Скотч армований</a>
+                <a href="malyarniy-skotch.html">Скотч малярський</a>
+                <a href="stretch-prozoriy.html">Стрейч прозорий</a>
+                <a href="stretch-cherniy.html">Стрейч чорний</a>
+                <a href="#">Харчова плівка</a>
+                <a href="trash-bags.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Пакети для сміття</a>
+                <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
+                <a href="#">Рукавиці робочі</a>
+            </nav>
         </aside>
 
         <main class="content-area">
@@ -112,9 +115,21 @@
                 
                 <!-- Товар 1: 35 л -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/35літрів.jpg" alt="Мішки для сміття 35л"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Мішки для сміття Чорні 35 л (15 шт)"
+                         data-price="20"
+                         data-boxqty="50"
+                         data-sku="026"
+                         data-img="images/35літрів.jpg"
+                         data-desc="Компактні та зручні мішки для сміття підійдуть для дому, офісу та повсякденного використання. Оптимальна щільність запобігає розривам."
+                         data-advantages="Оптимальні розміри для побутових відходів|Легкі та зручні у використанні|Практичне намотування по 15 шт. у рулоні|Доступна упаковка для регулярного застосування"
+                         data-specs="Об'єм: 35 л | Кількість у рулоні: 15 шт | Ширина: 50 см | Довжина: 60 см | Товщина: 15 мкм | Матеріал: HDPE | Упаковка: 50 рулонів | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/35літрів.jpg" alt="Мішки для сміття 35л">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Мішки для сміття чорні 35 л</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Мішки для сміття чорні 35 л
+                        </div>
                         <div class="item-sku">Код: <span>026</span></div>
                         <div class="item-desc">Зручні та практичні пакети для побутового сміття. Оптимальна щільність для щоденного використання в офісах чи вдома.</div>
                         <div class="item-specs"><p>📏 35 л (по 15 шт)</p><p>📦 В ящику: 50 рулонів</p></div>
@@ -129,9 +144,21 @@
 
                 <!-- Товар 2: 60 л -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/60літрів.jpg" alt="Мішки для сміття 60л"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Мішки для сміття Чорні 60 л (10 шт)"
+                         data-price="20"
+                         data-boxqty="50"
+                         data-sku="027"
+                         data-img="images/60літрів.jpg"
+                         data-desc="Стандартні мішки середнього об'єму для побутових та офісних відходів. Забезпечують міцність та надійність при заповненні."
+                         data-advantages="Зручний об'єм для стандартних відтермінувань|Міцний поліетилен стійкий до проколів|Намотування по 10 шт. у рулоні|Підходить для дому та офісів"
+                         data-specs="Об'єм: 60 л | Кількість у рулоні: 10 шт | Матеріал: HDPE | Упаковка: 50 рулонів | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/60літрів.jpg" alt="Мішки для сміття 60л">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Мішки для сміття чорні 60 л</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Мішки для сміття чорні 60 л
+                        </div>
                         <div class="item-sku">Код: <span>027</span></div>
                         <div class="item-desc">Стандартні мішки середнього об'єму. Підходять для більшості офісних та стандартних кухонних відтермінувань.</div>
                         <div class="item-specs"><p>📏 60 л (по 10 шт)</p><p>📦 В ящику: 50 рулонів</p></div>
@@ -146,9 +173,21 @@
 
                 <!-- Товар 3: 120 л -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/120літрів.jpg" alt="Мішки для сміття 120л"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Мішки для сміття чорні міцні 120 л (10 шт)"
+                         data-price="37"
+                         data-boxqty="30"
+                         data-sku="028"
+                         data-img="images/120літрів.jpg"
+                         data-desc="Збільшені міцні пакети для будівельного сміття, великих обсягів відходів або прибирання території. Висока стійкість до розривів."
+                         data-advantages="Збільшений об'єм для великих відходів|Підвищена міцність та товщина матеріалу|Зручні для будівельних та господарських робіт|Намотування по 10 шт. у рулоні"
+                         data-specs="Об'єм: 120 л | Кількість у рулоні: 10 шт | Матеріал: HDPE/LDPE | Упаковка: 30 рулонів | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/120літрів.jpg" alt="Мішки для сміття 120л">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Мішки для сміття чорні міцні 120 л</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Мішки для сміття чорні міцні 120 л
+                        </div>
                         <div class="item-sku">Код: <span>028</span></div>
                         <div class="item-desc">Збільшені міцні пакети для будівельного сміття, великих обсягів відходів або прибирання території.</div>
                         <div class="item-specs"><p>📏 120 л (по 10 шт)</p><p>📦 В ящику: 30 рулонів</p></div>
@@ -163,9 +202,21 @@
 
                 <!-- Товар 4: 160 л -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/160літрів.jpg" alt="Мішки для сміття 160л"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Мішки для сміття чорні надміцні 160 л (10 шт)"
+                         data-price="55"
+                         data-boxqty="20"
+                         data-sku="029"
+                         data-img="images/160літрів.jpg"
+                         data-desc="Професійні надміцні сміттєві пакети великої місткості для складів, підприємств та генерального прибирання. Максимальна витривалість."
+                         data-advantages="Максимальна місткість 160 літрів|Надміцна структура для важких відходів|Професійне застосування (склади, підприємства)|Намотування по 10 шт. у рулоні"
+                         data-specs="Об'єм: 160 л | Кількість у рулоні: 10 шт | Матеріал: HDPE/LDPE | Упаковка: 20 рулонів | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/160літрів.jpg" alt="Мішки для сміття 160л">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Мішки для сміття чорні надміцні 160 л</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Мішки для сміття чорні надміцні 160 л
+                        </div>
                         <div class="item-sku">Код: <span>029</span></div>
                         <div class="item-desc">Професійні надміцні сміттєві пакети великої місткості для складів, підприємств та генерального прибирання.</div>
                         <div class="item-specs"><p>📏 160 л (по 10 шт)</p><p>📦 В ящику: 20 рулонів</p></div>
