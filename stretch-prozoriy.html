@@ -61,6 +61,9 @@
         .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
         .item-sku span { color: #4B5563; font-weight: 700; }
         .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
+
+        .card-image img, .item-title { cursor: pointer; transition: opacity 0.2s; }
+        .card-image img:hover, .item-title:hover { opacity: 0.85; }
     </style>
 </head>
 <body>
@@ -112,9 +115,21 @@
                 
                 <!-- Товар 1: Стрейч 150 (код 021) -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Стрйч150.jpg" alt="Стрейч плівка 150"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Стрейч плівка первинна Прозора 150 м х 20 мкм х 1.5 кг"
+                         data-price="200"
+                         data-boxqty="6"
+                         data-sku="021"
+                         data-img="images/Стрйч150.jpg"
+                         data-desc="Стрейч-плівка — це надійна первинна стрейч-плівка, що використовується для пакування, захисту та фіксації вантажів. Забезпечує щільне прилягання, захищає від вологи, пилу та механічних пошкоджень. Підходить також для ручного намотування."
+                         data-advantages="Висока міцність та еластичність|Зручна у використанні, легко тягнеться|Захищає від вологи, бруду та пошкоджень|Ідеальна для складів, переїздів та транспортування"
+                         data-specs="Товщина: 20 мкм | Довжина: 150 м | Ширина: 50 см | Вага: 1.5 кг | Упаковка: ящик 6 шт | Пре-стретч: 200-300% | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Стрйч150.jpg" alt="Стрейч плівка 150">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Стрейч плівка первинна Прозора 150 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Стрейч плівка первинна Прозора 150 м
+                        </div>
                         <div class="item-sku">Код: <span>021</span></div>
                         <div class="item-desc">Надійна первинна стрейч-плівка. Забезпечує міцну фіксацію вантажів та захист від пилу і вологи.</div>
                         <div class="item-specs"><p>📏 150 м х 20 мкм х 1.5 кг</p><p>📦 В ящику: 6 шт</p></div>
@@ -129,9 +144,21 @@
 
                 <!-- Товар 2: Стрейч 200 (код 004) -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Стрйч200.jpg" alt="Стрейч плівка 200"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Стрейч плівка первинна Прозора 200 м х 20 мкм х 1.8 кг"
+                         data-price="231"
+                         data-boxqty="6"
+                         data-sku="004"
+                         data-img="images/Стрйч200.jpg"
+                         data-desc="Стрейч-плівка — це надійна первинна стрейч-плівка, що використовується для пакування, захисту та фіксації вантажів. Забезпечує щільне прилягання, захищає від вологи, пилу та механічних пошкоджень."
+                         data-advantages="Висока міцність та еластичність|Зручна у використанні, легко тягнеться|Захищає від вологи, бруду та пошкоджень|Ідеальна для складів, переїздів та транспортування"
+                         data-specs="Товщина: 20 мкм | Довжина: 200 м | Ширина: 50 см | Вага: 1.8 кг | Упаковка: ящик 6 шт | Пре-стретч: 200-300% | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Стрйч200.jpg" alt="Стрейч плівка 200">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Стрейч плівка первинна Прозора 200 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Стрейч плівка первинна Прозора 200 м
+                        </div>
                         <div class="item-sku">Код: <span>004</span></div>
                         <div class="item-desc">Оптимальний вибір для пакування середніх товарів. Висока стійкість до розривів та проколів.</div>
                         <div class="item-specs"><p>📏 200 м х 20 мкм х 1.8 кг</p><p>📦 В ящику: 6 шт</p></div>
@@ -146,9 +173,21 @@
 
                 <!-- Товар 3: Стрейч 300 (код 008) -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Стрйч300.jpg" alt="Стрейч плівка 300"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Стрейч плівка первинна Прозора 300 м х 20 мкм х 2.5 кг"
+                         data-price="301"
+                         data-boxqty="6"
+                         data-sku="008"
+                         data-img="images/Стрйч300.jpg"
+                         data-desc="Стрейч-плівка — це надійна первинна стрейч-плівка, що використовується для пакування, захисту та фіксації вантажів. Забезпечує щільне прилягання, захищає від вологи, пилу та механічних пошкоджень."
+                         data-advantages="Висока міцність та еластичність|Зручна у використанні, легко тягнеться|Захищає від вологи, бруду та пошкоджень|Ідеальна для складів, переїздів та транспортування"
+                         data-specs="Товщина: 20 мкм | Довжина: 300 м | Ширина: 50 см | Вага: 2.5 кг | Упаковка: ящик 6 шт | Пре-стретч: 200-300% | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Стрйч300.jpg" alt="Стрейч плівка 300">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Стрейч плівка первинна Прозора 300 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Стрейч плівка первинна Прозора 300 м
+                        </div>
                         <div class="item-sku">Код: <span>008</span></div>
                         <div class="item-desc">Максимальна намотка для складського зберігання та масштабних вантажів. Найвигідніший формат.</div>
                         <div class="item-specs"><p>📏 300 м х 20 мкм х 2.5 кг</p><p>📦 В ящику: 6 шт</p></div>
@@ -163,9 +202,21 @@
 
                 <!-- Товар 4: Стрейч 250 (короткий ролик) — код 006 -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Стрйч250.jpg" alt="Стрейч прозорий короткий 250мм"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Стрейч плівка первинна Прозора 250 мм (короткий ролик) х 0.9 кг"
+                         data-price="131"
+                         data-boxqty="12"
+                         data-sku="006"
+                         data-img="images/Стрйч250.jpg"
+                         data-desc="Стрейч-плівка — це надійна первинна стрейч-плівка, що використовується для пакування, захисту та фіксації вантажів. Забезпечує щільне прилягання, захищає від вологи, пилу та механічних пошкоджень."
+                         data-advantages="Висока міцність та еластичність|Зручна у використанні, легко тягнеться|Захищає від вологи, бруду та пошкоджень|Ідеальна для ручного пакування посилок"
+                         data-specs="Довжина: 200 м | Ширина: 250 мм | Вага: 0.9 кг | Упаковка: ящик 12 шт | Пре-стретч: 200-300% | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Стрйч250.jpg" alt="Стрейч прозорий короткий 250мм">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Стрейч плівка Прозора 250 мм (короткий ролик)</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Стрейч плівка Прозора 250 мм (короткий ролик)
+                        </div>
                         <div class="item-sku">Код: <span>006</span></div>
                         <div class="item-desc">Вузький рулон (короткий ролик). Надзвичайно зручний для ручного пакування посилок, коробок і дрібних партій.</div>
                         <div class="item-specs"><p>📏 250 мм х 200 м х 0.9 кг</p><p>📦 В ящику: 12 шт</p></div>
