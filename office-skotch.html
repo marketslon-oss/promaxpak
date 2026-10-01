@@ -91,6 +91,14 @@
         .cart-wrapper { position: relative; display: flex; align-items: center; text-decoration: none; transition: transform 0.2s; cursor: pointer; }
         .cart-wrapper:hover { transform: scale(1.1); }
         .cart-counter { position: absolute; top: -8px; right: -10px; background-color: #EF4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; min-width: 20px; text-align: center; }
+
+        /* Стилі для опису та коду */
+        .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
+        .item-sku span { color: #4B5563; font-weight: 700; }
+        .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
+        
+        .card-image img, .item-title { cursor: pointer; transition: opacity 0.2s; }
+        .card-image img:hover, .item-title:hover { opacity: 0.85; }
     </style>
 </head>
 <body>
@@ -122,108 +130,192 @@
         <aside class="sidebar">
             <h3>Каталог продукції</h3>
             <nav class="category-menu">
-    <a href="skotch.html">Скотч пакувальний</a>
-    <a href="color-skotch.html">Скотч кольоровий</a>
-    <a href="office-skotch.html"class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч канцелярський</a>
-    <a href="logo-skotch.html">Скотч з логотипом</a>
-    <a href="reinforced-skotch.html">Скотч армований</a>
-    <a href="malyarniy-skotch.html">Скотч малярський</a>
-    <a href="stretch-prozoriy.html">Стрейч прозорий</a>
-    <a href="stretch-cherniy.html">Стрейч чорний</a>
-    <a href="#">Харчова плівка</a>
-    <a href="trash-bags.html">Пакети для сміття</a>
-    <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
-    <a href="#">Рукавиці робочі</a>
-</nav>
+                <a href="skotch.html">Скотч пакувальний</a>
+                <a href="color-skotch.html">Скотч кольоровий</a>
+                <a href="office-skotch.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч канцелярський</a>
+                <a href="logo-skotch.html">Скотч з логотипом</a>
+                <a href="reinforced-skotch.html">Скотч армований</a>
+                <a href="malyarniy-skotch.html">Скотч малярський</a>
+                <a href="stretch-prozoriy.html">Стрейч прозорий</a>
+                <a href="stretch-cherniy.html">Стрейч чорний</a>
+                <a href="#">Харчова плівка</a>
+                <a href="trash-bags.html">Пакети для сміття</a>
+                <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
+                <a href="#">Рукавиці робочі</a>
+            </nav>
         </aside>
 
         <main class="content-area">
             <div class="product-grid">
                 
-                <!-- 12 мм на 20 м -->
+                <!-- 12 мм на 20 ярдів -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/12на20.jpg" alt="Скотч 12х20"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч канцелярський 12 мм х 20 ярд"
+                         data-price="1"
+                         data-boxqty="720"
+                         data-sku="020"
+                         data-img="images/12на20.jpg"
+                         data-desc="Канцелярський скотч — один з найпопулярніших видів липких стрічок. Використовується в побуті, в офісах, навчальних закладах, адміністративних центрах тощо."
+                         data-advantages="Прозорість пакувального матеріалу|Протягом тривалого часу зберігає свій колір без жовтого відтінку|Високий рівень зчеплення (міцна адгезія)|Естетичний вигляд клеєного предмета"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Ширина: 12 мм | Довжина: 20 ярд | Упаковка: 720 шт" style="cursor: pointer;">
+                        <img src="images/12на20.jpg" alt="Скотч 12х20">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч канцелярський 12 мм х 20 м</div>
-                        <div class="item-specs"><p>📏 12 мм х 20 м</p><p>📦 В ящику: 720 шт</p></div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч канцелярський 12 мм х 20 ярд
+                        </div>
+                        <div class="item-sku">Код: <span>020</span></div>
+                        <div class="item-desc">Канцелярський скотч — один з найпопулярніших видів липких стрічок для офісу та побуту.</div>
+                        <div class="item-specs"><p>📏 12 мм х 20 ярд</p><p>📦 В ящику: 720 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">1 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 12 мм х 20 м', 1, 720)">
+                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 12 мм х 20 ярд', 1, 720, '020')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 12 мм на 30 м -->
+                <!-- 12 мм на 30 ярдів -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/12на30.jpg" alt="Скотч 12х30"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч канцелярський 12 мм х 30 ярд"
+                         data-price="1.5"
+                         data-boxqty="720"
+                         data-sku="021"
+                         data-img="images/12на30.jpg"
+                         data-desc="Канцелярський скотч — один з найпопулярніших видів липких стрічок. Використовується в побуті, в офісах, навчальних закладах, адміністративних центрах тощо."
+                         data-advantages="Прозорість пакувального матеріалу|Протягом тривалого часу зберігає свій колір без жовтого відтінку|Високий рівень зчеплення (міцна адгезія)|Естетичний вигляд клеєного предмета"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Ширина: 12 мм | Довжина: 30 ярд | Упаковка: 720 шт" style="cursor: pointer;">
+                        <img src="images/12на30.jpg" alt="Скотч 12х30">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч канцелярський 12 мм х 30 м</div>
-                        <div class="item-specs"><p>📏 12 мм х 30 м</p><p>📦 В ящику: 720 шт</p></div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч канцелярський 12 мм х 30 ярд
+                        </div>
+                        <div class="item-sku">Код: <span>021</span></div>
+                        <div class="item-desc">Канцелярський скотч — один з найпопулярніших видів липких стрічок для офісу та побуту.</div>
+                        <div class="item-specs"><p>📏 12 мм х 30 ярд</p><p>📦 В ящику: 720 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">1.5 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 12 мм х 30 м', 1.5, 720)">
+                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 12 мм х 30 ярд', 1.5, 720, '021')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 18 мм на 20 м -->
+                <!-- 18 мм на 20 ярдів -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/18на20.jpg" alt="Скотч 18х20"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч канцелярський 18 мм х 20 ярд"
+                         data-price="1.5"
+                         data-boxqty="480"
+                         data-sku="022"
+                         data-img="images/18на20.jpg"
+                         data-desc="Канцелярський скотч — один з найпопулярніших видів липких стрічок. Використовується в побуті, в офісах, навчальних закладах, адміністративних центрах тощо."
+                         data-advantages="Прозорість пакувального матеріалу|Протягом тривалого часу зберігає свій колір без жовтого відтінку|Високий рівень зчеплення (міцна адгезія)|Естетичний вигляд клеєного предмета"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Ширина: 18 мм | Довжина: 20 ярд | Упаковка: 480 шт" style="cursor: pointer;">
+                        <img src="images/18на20.jpg" alt="Скотч 18х20">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч канцелярський 18 мм х 20 м</div>
-                        <div class="item-specs"><p>📏 18 мм х 20 м</p><p>📦 В ящику: 480 шт</p></div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч канцелярський 18 мм х 20 ярд
+                        </div>
+                        <div class="item-sku">Код: <span>022</span></div>
+                        <div class="item-desc">Канцелярський скотч — один з найпопулярніших видів липких стрічок для офісу та побуту.</div>
+                        <div class="item-specs"><p>📏 18 мм х 20 ярд</p><p>📦 В ящику: 480 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">1.5 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 18 мм х 20 м', 1.5, 480)">
+                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 18 мм х 20 ярд', 1.5, 480, '022')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 18 мм на 30 м -->
+                <!-- 18 мм на 30 ярдів -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/18на30.jpg" alt="Скотч 18х30"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч канцелярський 18 мм х 30 ярд"
+                         data-price="2"
+                         data-boxqty="480"
+                         data-sku="023"
+                         data-img="images/18на30.jpg"
+                         data-desc="Канцелярський скотч — один з найпопулярніших видів липких стрічок. Використовується в побуті, в офісах, навчальних закладах, адміністративних центрах тощо."
+                         data-advantages="Прозорість пакувального матеріалу|Протягом тривалого часу зберігає свій колір без жовтого відтінку|Високий рівень зчеплення (міцна адгезія)|Естетичний вигляд клеєного предмета"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Ширина: 18 мм | Довжина: 30 ярд | Упаковка: 480 шт" style="cursor: pointer;">
+                        <img src="images/18на30.jpg" alt="Скотч 18х30">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч канцелярський 18 мм х 30 м</div>
-                        <div class="item-specs"><p>📏 18 мм х 30 м</p><p>📦 В ящику: 480 шт</p></div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч канцелярський 18 мм х 30 ярд
+                        </div>
+                        <div class="item-sku">Код: <span>023</span></div>
+                        <div class="item-desc">Канцелярський скотч — один з найпопулярніших видів липких стрічок для офісу та побуту.</div>
+                        <div class="item-specs"><p>📏 18 мм х 30 ярд</p><p>📦 В ящику: 480 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">2 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 18 мм х 30 м', 2, 480)">
+                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 18 мм х 30 ярд', 2, 480, '023')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 24 мм на 20 м -->
+                <!-- 24 мм на 20 ярдів -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/24на20.jpg" alt="Скотч 24х20"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч канцелярський 24 мм х 20 ярд"
+                         data-price="2"
+                         data-boxqty="360"
+                         data-sku="024"
+                         data-img="images/24на20.jpg"
+                         data-desc="Канцелярський скотч — один з найпопулярніших видів липких стрічок. Використовується в побуті, в офісах, навчальних закладах, адміністративних центрах тощо."
+                         data-advantages="Прозорість пакувального матеріалу|Протягом тривалого часу зберігає свій колір без жовтого відтінку|Високий рівень зчеплення (міцна адгезія)|Естетичний вигляд клеєного предмета"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Ширина: 24 мм | Довжина: 20 ярд | Упаковка: 360 шт" style="cursor: pointer;">
+                        <img src="images/24на20.jpg" alt="Скотч 24х20">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч канцелярський 24 мм х 20 м</div>
-                        <div class="item-specs"><p>📏 24 мм х 20 м</p><p>📦 В ящику: 360 шт</p></div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч канцелярський 24 мм х 20 ярд
+                        </div>
+                        <div class="item-sku">Код: <span>024</span></div>
+                        <div class="item-desc">Канцелярський скотч — один з найпопулярніших видів липких стрічок для офісу та побуту.</div>
+                        <div class="item-specs"><p>📏 24 мм х 20 ярд</p><p>📦 В ящику: 360 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">2 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 24 мм х 20 м', 2, 360)">
+                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 24 мм х 20 ярд', 2, 360, '024')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- 24 мм на 30 м -->
+                <!-- 24 мм на 30 ярдів -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/24на30.jpg" alt="Скотч 24х30"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч канцелярський 24 мм х 30 ярд"
+                         data-price="3"
+                         data-boxqty="360"
+                         data-sku="025"
+                         data-img="images/24на30.jpg"
+                         data-desc="Канцелярський скотч — один з найпопулярніших видів липких стрічок. Використовується в побуті, в офісах, навчальних закладах, адміністративних центрах тощо."
+                         data-advantages="Прозорість пакувального матеріалу|Протягом тривалого часу зберігає свій колір без жовтого відтінку|Високий рівень зчеплення (міцна адгезія)|Естетичний вигляд клеєного предмета"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Ширина: 24 мм | Довжина: 30 ярд | Упаковка: 360 шт" style="cursor: pointer;">
+                        <img src="images/24на30.jpg" alt="Скотч 24х30">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Скотч канцелярський 24 мм х 30 м</div>
-                        <div class="item-specs"><p>📏 24 мм х 30 м</p><p>📦 В ящику: 360 шт</p></div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч канцелярський 24 мм х 30 ярд
+                        </div>
+                        <div class="item-sku">Код: <span>025</span></div>
+                        <div class="item-desc">Канцелярський скотч — один з найпопулярніших видів липких стрічок для офісу та побуту.</div>
+                        <div class="item-specs"><p>📏 24 мм х 30 ярд</p><p>📦 В ящику: 360 шт</p></div>
                         <div class="item-bottom">
                             <div class="item-price">3 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 24 мм х 30 м', 3, 360)">
+                            <button class="btn-buy" onclick="addToCart('Скотч канцелярський 24 мм х 30 ярд', 3, 360, '025')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
