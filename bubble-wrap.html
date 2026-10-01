@@ -61,6 +61,9 @@
         .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
         .item-sku span { color: #4B5563; font-weight: 700; }
         .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
+
+        .card-image img, .item-title { cursor: pointer; transition: opacity 0.2s; }
+        .card-image img:hover, .item-title:hover { opacity: 0.85; }
     </style>
 </head>
 <body>
@@ -92,19 +95,19 @@
         <aside class="sidebar">
             <h3>Каталог продукції</h3>
             <nav class="category-menu">
-    <a href="skotch.html">Скотч пакувальний</a>
-    <a href="color-skotch.html">Скотч кольоровий</a>
-    <a href="office-skotch.html">Скотч канцелярський</a>
-    <a href="logo-skotch.html">Скотч з логотипом</a>
-    <a href="reinforced-skotch.html">Скотч армований</a>
-    <a href="malyarniy-skotch.html">Скотч малярський</a>
-    <a href="stretch-prozoriy.html">Стрейч прозорий</a>
-    <a href="stretch-cherniy.html">Стрейч чорний</a>
-    <a href="#">Харчова плівка</a>
-    <a href="trash-bags.html">Пакети для сміття</a>
-    <a href="bubble-wrap.html"class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Повітряно-пухирчаста плівка</a>
-    <a href="#">Рукавиці робочі</a>
-</nav>
+                <a href="skotch.html">Скотч пакувальний</a>
+                <a href="color-skotch.html">Скотч кольоровий</a>
+                <a href="office-skotch.html">Скотч канцелярський</a>
+                <a href="logo-skotch.html">Скотч з логотипом</a>
+                <a href="reinforced-skotch.html">Скотч армований</a>
+                <a href="malyarniy-skotch.html">Скотч малярський</a>
+                <a href="stretch-prozoriy.html">Стрейч прозорий</a>
+                <a href="stretch-cherniy.html">Стрейч чорний</a>
+                <a href="#">Харчова плівка</a>
+                <a href="trash-bags.html">Пакети для сміття</a>
+                <a href="bubble-wrap.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Повітряно-пухирчаста плівка</a>
+                <a href="#">Рукавиці робочі</a>
+            </nav>
         </aside>
 
         <main class="content-area">
@@ -112,9 +115,21 @@
                 
                 <!-- Товар 1: Пупирка -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Пупирка.jpeg" alt="Повітряно-пухирчаста плівка 50 м"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Повітряно-пухирчаста плівка 500 мм х 50 м"
+                         data-price="584"
+                         data-boxqty="1"
+                         data-sku="032"
+                         data-img="images/Пупирка.jpeg"
+                         data-desc="Повітряно-бульбашкова плівка — це надійний пакувальний матеріал для захисту товарів від ударів, вологи та пошкоджень під час транспортування. Підходить для крихких, цінних і великогабаритних предметів."
+                         data-advantages="Відмінна амортизація і захист від механічних пошкоджень|Легкий і зручний у використанні|Універсальне застосування - для побутових і промислових потреб|Економічна витрата завдяки щільності 60 мкм"
+                         data-specs="Країна виробник: Україна | Довжина: 50 м | Ширина: 50 см (500 мм) | Товщина: 60 мкм | Продаж: від 1 рулону | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Пупирка.jpeg" alt="Повітряно-пухирчаста плівка 50 м">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Повітряно-пухирчаста плівка 500 мм х 50 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Повітряно-пухирчаста плівка 500 мм х 50 м
+                        </div>
                         <div class="item-sku">Код: <span>032</span></div>
                         <div class="item-desc">Надійний захист крихких товарів від ударів, вібрацій та подряпин. Ідеально підходить для пакування електроніки, скла, посуду та меблів.</div>
                         <div class="item-specs"><p>📏 500 мм х 50 м</p><p>📦 Продаж: від 1 рулону</p></div>
