@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Скотч з логотипом — ProMaxPak</title>
+    <title>Скотч кольоровий — ProMaxPak</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -58,6 +58,7 @@
         .cart-wrapper:hover { transform: scale(1.1); }
         .cart-counter { position: absolute; top: -8px; right: -10px; background-color: #EF4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; min-width: 20px; text-align: center; }
         
+        /* Класи для красивого опису і коду */
         .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
         .item-sku span { color: #4B5563; font-weight: 700; }
         .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
@@ -96,9 +97,9 @@
             <h3>Каталог продукції</h3>
             <nav class="category-menu">
                 <a href="skotch.html">Скотч пакувальний</a>
-                <a href="color-skotch.html">Скотч кольоровий</a>
+                <a href="color-skotch.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч кольоровий</a>
                 <a href="office-skotch.html">Скотч канцелярський</a>
-                <a href="logo-skotch.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Скотч з логотипом</a>
+                <a href="logo-skotch.html">Скотч з логотипом</a>
                 <a href="reinforced-skotch.html">Скотч армований</a>
                 <a href="malyarniy-skotch.html">Скотч малярський</a>
                 <a href="stretch-prozoriy.html">Стрейч прозорий</a>
@@ -113,65 +114,174 @@
         <main class="content-area">
             <div class="product-grid">
                 
-                <!-- Товар 1: Швидкий старт -->
+                <!-- Білий -->
                 <div class="item-card">
                     <div class="card-image" onclick="openProductModalFromCard(this)"
-                         data-title="Скотч з логотипом Пакет &quot;ШВИДКИЙ СТАРТ&quot;"
-                         data-price="95"
+                         data-title="Скотч пакувальний Білий"
+                         data-price="28"
                          data-boxqty="72"
-                         data-sku="035"
-                         data-img="images/Скотч с логотіпом.jpeg"
-                         data-desc="Ідеальне рішення для малого бізнесу та інтернет-магазинів. Створіть упізнаваність свого бренду без переплат за величезні тиражі. Нанесення вашого логотипу на скотч зробить кожну посилку рекламним носієм."
-                         data-advantages="Підвищення впізнаваності вашого бренду|Надійний захист пакування від несанкціонованого розкриття|Безкоштовна розробка макета та виготовлення кліше|Безкоштовна доставка Новою Поштою|Висока клейкість та міцність стрічки"
-                         data-specs="Країна виробник: Україна | Тип: Брендований скотч | Довжина: 100 м | Ширина: 48 мм | Товщина: 45 мкм | Особливості: Безкоштовне кліше" style="cursor: pointer;">
-                        <img src="images/Скотч с логотіпом.jpeg" alt="Скотч з логотипом Швидкий старт">
+                         data-sku="010"
+                         data-img="images/white.jpg"
+                         data-desc="Ідеально підходить для маркування коробок. Непрозорий білий колір надійно приховує написи під стрічкою."
+                         data-advantages="Міцна фіксація на різних поверхнях|Зручний для маркування та захисту пакування|Надійно приховує написи на коробці"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Колір: Білий | Довжина: 60 м | Ширина: 45 мм | Товщина: 40 мкм" style="cursor: pointer;">
+                        <img src="images/white.jpg" alt="Скотч білий">
                     </div>
                     <div class="item-info">
                         <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
-                            Скотч з логотипом Пакет "ШВИДКИЙ СТАРТ"
+                            Скотч пакувальний Білий
                         </div>
-                        <div class="item-sku">Код: <span>035</span></div>
-                        <div class="item-desc">Ідеальне рішення для малого бізнесу та інтернет-магазинів. Створіть упізнаваність свого бренду без переплат за величезні тиражі.</div>
-                        <div class="item-specs">
-                            <p>📏 48 мм х 100 м</p>
-                            <p>📦 В ящику: 72 рулони</p>
-                            <p style="color:#059669; font-weight:600; font-size: 0.85rem; margin-top: 5px;">🎁 Безкоштовний дизайн, кліше та доставка!</p>
-                        </div>
+                        <div class="item-sku">Код: <span>010</span></div>
+                        <div class="item-desc">Ідеально підходить для маркування коробок. Непрозорий білий колір надійно приховує написи під стрічкою.</div>
+                        <div class="item-specs"><p>📏 60 м х 45 мм</p><p>📦 В ящику: 72 шт</p></div>
                         <div class="item-bottom">
-                            <div class="item-price">95 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч з логотипом Швидкий старт 48мм х 100м', 95, 72, '035')">
+                            <div class="item-price">28 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний Білий 60 м х 45 мм', 28, 72, '010')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Товар 2: 200 метрів -->
+                <!-- Синій -->
                 <div class="item-card">
                     <div class="card-image" onclick="openProductModalFromCard(this)"
-                         data-title="Скотч брендований з логотипом 200 м"
-                         data-price="190"
-                         data-boxqty="36"
-                         data-sku="034"
-                         data-img="images/Скотч с логотіпом.jpeg"
-                         data-desc="Промислова намотка для стабільного брендування товарів та надійного захисту від підробок. Відмінне рішення для великих складів, виробництв та інтенсивного щоденного пакування."
-                         data-advantages="Збільшена намотка для рідшої заміни рулонів (економія часу)|Максимальний захист вантажу від крадіжок та розкриття|Додаткова реклама вашого бренду при транспортуванні|Стійкість до низьких температур і розривів"
-                         data-specs="Країна виробник: Україна | Тип: Брендований скотч | Довжина: 200 м | Ширина: 48 мм | Товщина: 45 мкм" style="cursor: pointer;">
-                        <img src="images/Скотч с логотіпом.jpeg" alt="Скотч брендований 200м">
+                         data-title="Скотч пакувальний Синій"
+                         data-price="28"
+                         data-boxqty="72"
+                         data-sku="011"
+                         data-img="images/blue.jpg"
+                         data-desc="Дозволяє швидко візуально ідентифікувати вантаж на складі. Відрізняється яскравим кольором."
+                         data-advantages="Міцна фіксація на різних поверхнях|Зручний для сортування партій товарів|Візуальний контроль пакування"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Колір: Синій | Довжина: 60 м | Ширина: 45 мм | Товщина: 40 мкм" style="cursor: pointer;">
+                        <img src="images/blue.jpg" alt="Скотч синій">
                     </div>
                     <div class="item-info">
                         <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
-                            Скотч брендований з логотипом 200 м
+                            Скотч пакувальний Синій
                         </div>
-                        <div class="item-sku">Код: <span>034</span></div>
-                        <div class="item-desc">Промислова намотка для стабільного брендування товарів та надійного захисту від підробок.</div>
-                        <div class="item-specs">
-                            <p>📏 200 м х 48 мм</p>
-                            <p>📦 В ящику: 36 шт</p>
-                        </div>
+                        <div class="item-sku">Код: <span>011</span></div>
+                        <div class="item-desc">Дозволяє швидко візуально ідентифікувати вантаж на складі. Відрізняється яскравим кольором.</div>
+                        <div class="item-specs"><p>📏 60 м х 45 мм</p><p>📦 В ящику: 72 шт</p></div>
                         <div class="item-bottom">
-                            <div class="item-price">190 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
-                            <button class="btn-buy" onclick="addToCart('Скотч брендований 200 м х 48 мм', 190, 36, '034')">
+                            <div class="item-price">28 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний Синій 60 м х 45 мм', 28, 72, '011')">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Червоний -->
+                <div class="item-card">
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч пакувальний Червоний"
+                         data-price="28"
+                         data-boxqty="72"
+                         data-sku="012"
+                         data-img="images/red.jpg"
+                         data-desc="Максимально привертає увагу. Відмінно підходить для виділення крихких або пріоритетних вантажів."
+                         data-advantages="Міцна фіксація на різних поверхнях|Ідеально для крихких вантажів|Максимально привертає увагу"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Колір: Червоний | Довжина: 60 м | Ширина: 45 мм | Товщина: 40 мкм" style="cursor: pointer;">
+                        <img src="images/red.jpg" alt="Скотч червоний">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч пакувальний Червоний
+                        </div>
+                        <div class="item-sku">Код: <span>012</span></div>
+                        <div class="item-desc">Максимально привертає увагу. Відмінно підходить для виділення крихких або пріоритетних вантажів.</div>
+                        <div class="item-specs"><p>📏 60 м х 45 мм</p><p>📦 В ящику: 72 шт</p></div>
+                        <div class="item-bottom">
+                            <div class="item-price">28 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний Червоний 60 м х 45 мм', 28, 72, '012')">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Жовтий -->
+                <div class="item-card">
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч пакувальний Жовтий"
+                         data-price="28"
+                         data-boxqty="72"
+                         data-sku="013"
+                         data-img="images/yellow.jpg"
+                         data-desc="Яскрава кольорова стрічка. Зручна для маркування, сортування партій товарів та візуального контролю."
+                         data-advantages="Міцна фіксація на різних поверхнях|Зручна для сортування партій|Яскрава кольорова стрічка"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Колір: Жовтий | Довжина: 60 м | Ширина: 45 мм | Товщина: 40 мкм" style="cursor: pointer;">
+                        <img src="images/yellow.jpg" alt="Скотч жовтий">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч пакувальний Жовтий
+                        </div>
+                        <div class="item-sku">Код: <span>013</span></div>
+                        <div class="item-desc">Яскрава кольорова стрічка. Зручна для маркування, сортування партій товарів та візуального контролю.</div>
+                        <div class="item-specs"><p>📏 60 м х 45 мм</p><p>📦 В ящику: 72 шт</p></div>
+                        <div class="item-bottom">
+                            <div class="item-price">28 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний Жовтий 60 м х 45 мм', 28, 72, '013')">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Зелений -->
+                <div class="item-card">
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч пакувальний Зелений"
+                         data-price="28"
+                         data-boxqty="72"
+                         data-sku="014"
+                         data-img="images/green.jpg"
+                         data-desc="Часто використовується для маркування еко-продукції або специфічних груп товарів на вашому складі."
+                         data-advantages="Міцна фіксація на різних поверхнях|Ідеально для еко-продукції|Відмінна клейкість"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Колір: Зелений | Довжина: 60 м | Ширина: 45 мм | Товщина: 40 мкм" style="cursor: pointer;">
+                        <img src="images/green.jpg" alt="Скотч зелений">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч пакувальний Зелений
+                        </div>
+                        <div class="item-sku">Код: <span>014</span></div>
+                        <div class="item-desc">Часто використовується для маркування еко-продукції або специфічних груп товарів на вашому складі.</div>
+                        <div class="item-specs"><p>📏 60 м х 45 мм</p><p>📦 В ящику: 72 шт</p></div>
+                        <div class="item-bottom">
+                            <div class="item-price">28 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний Зелений 60 м х 45 мм', 28, 72, '014')">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Чорний -->
+                <div class="item-card">
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Скотч пакувальний Чорний"
+                         data-price="28"
+                         data-boxqty="72"
+                         data-sku="015"
+                         data-img="images/black.jpg"
+                         data-desc="Повністю світлонепроникна чорна стрічка. Забезпечує максимальну конфіденційність вашого пакування."
+                         data-advantages="Міцна фіксація на різних поверхнях|Повністю світлонепроникна|Забезпечує максимальну конфіденційність"
+                         data-specs="Країна виробник: Україна | Вид: Односторонній | Колір: Чорний | Довжина: 60 м | Ширина: 45 мм | Товщина: 40 мкм" style="cursor: pointer;">
+                        <img src="images/black.jpg" alt="Скотч чорний">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Скотч пакувальний Чорний
+                        </div>
+                        <div class="item-sku">Код: <span>015</span></div>
+                        <div class="item-desc">Повністю світлонепроникна чорна стрічка. Забезпечує максимальну конфіденційність вашого пакування.</div>
+                        <div class="item-specs"><p>📏 60 м х 45 мм</p><p>📦 В ящику: 72 шт</p></div>
+                        <div class="item-bottom">
+                            <div class="item-price">28 грн <span style="font-size:0.75rem; color:#6B7280;">/ шт</span></div>
+                            <button class="btn-buy" onclick="addToCart('Скотч пакувальний Чорний 60 м х 45 мм', 28, 72, '015')">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg> Купити
                             </button>
                         </div>
@@ -197,5 +307,6 @@
     </div>
 
     <script src="cart.js"></script>
+
 </body>
 </html>
