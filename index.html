@@ -103,6 +103,126 @@
         .remove-btn { background: none; border: none; color: #EF4444; cursor: pointer; font-size: 0.85rem; margin-left: 10px; }
         .remove-btn:hover { text-decoration: underline; }
         .empty-cart-msg { text-align: center; color: #6B7280; padding: 20px 0; }
+
+        /* --- Оновлені стилі для плаваючих кнопок і меню месенджерів --- */
+        .floating-buttons {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            display: flex;
+            flex-direction: column; 
+            gap: 15px; 
+            z-index: 1500;
+        }
+        .float-btn {
+            background-color: #3B71CA;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            border: none;
+            text-decoration: none;
+        }
+        .float-btn:hover { transform: scale(1.08); background-color: #2b5cb3; }
+        
+        .chat-btn-special { background-color: #10B981; }
+        .chat-btn-special:hover { background-color: #059669; }
+
+        /* Меню месенджерів */
+        .messenger-menu-wrapper { position: relative; }
+        .messenger-menu {
+            position: absolute;
+            bottom: 35px;
+            right: 75px; 
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            display: none; /* Приховано за замовчуванням */
+            flex-direction: column;
+            overflow: hidden;
+            width: 180px;
+            border: 1px solid #E5E7EB;
+        }
+        .messenger-menu a {
+            padding: 14px 16px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #F3F4F6;
+            transition: background 0.2s;
+        }
+        .messenger-menu a:last-child { border-bottom: none; }
+        .messenger-menu a:hover { background-color: #F9FAFB; }
+        
+        /* Кольори іконок у меню */
+        .icon-viber { fill: #7360F2; }
+        .icon-tg { fill: #2AABEE; }
+        .icon-mail { fill: #EF4444; }
+
+        /* Окно чата */
+        .chat-window {
+            position: fixed;
+            bottom: 25px;
+            right: 100px;
+            width: 350px;
+            max-width: calc(100vw - 120px);
+            height: 450px;
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            z-index: 1500;
+            overflow: hidden;
+            display: none; 
+            border: 1px solid #E5E7EB;
+        }
+        .chat-header {
+            background-color: #10B981; 
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        .chat-header span { font-size: 0.95rem; }
+        .chat-close-btn {
+            background: none; border: none; color: white; font-size: 20px; cursor: pointer;
+        }
+        .chat-body {
+            padding: 15px; flex-grow: 1; overflow-y: auto; background-color: #F9FAFB; display: flex; flex-direction: column; gap: 10px;
+        }
+        .chat-message {
+            padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; max-width: 80%; line-height: 1.4;
+        }
+        .chat-message.support {
+            background-color: #E5E7EB; color: #1F2937; align-self: flex-start; border-bottom-left-radius: 2px;
+        }
+        .chat-message.user {
+            background-color: #10B981; color: white; align-self: flex-end; border-bottom-right-radius: 2px;
+        }
+        .chat-footer {
+            padding: 12px; background-color: #FFFFFF; border-top: 1px solid #E5E7EB; display: flex; gap: 8px;
+        }
+        .chat-footer input {
+            flex-grow: 1; padding: 10px 12px; border: 1px solid #D1D5DB; border-radius: 6px; outline: none; font-size: 0.9rem;
+        }
+        .chat-footer input:focus { border-color: #10B981; }
+        .chat-send-btn {
+            background-color: #10B981; color: white; border: none; padding: 0 15px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s;
+        }
+        .chat-send-btn:hover { background-color: #059669; }
     </style>
 </head>
 <body>
@@ -121,7 +241,6 @@
             <a href="#">Доставка та оплата</a>
             <a href="#">Контакти</a>
             
-            <!-- Іконка Корзини на головній сторінці -->
             <a onclick="openCartModal()" class="cart-wrapper" title="Кошик">
                 <svg fill="white" viewBox="0 0 24 24" width="26" height="26">
                     <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
@@ -132,7 +251,6 @@
     </header>
 
     <div class="catalog-layout">
-        
         <aside class="sidebar">
             <h3>Каталог продукції</h3>
             <nav class="category-menu">
@@ -158,57 +276,46 @@
                     <div class="card-image"><img src="images/Скотч пакувальний.jpeg" alt="Скотч пакувальний"></div>
                     <div class="card-title">Скотч пакувальний</div>
                 </a>
-
                 <a href="color-skotch.html" class="category-card">
                     <div class="card-image"><img src="images/Колоровий скотч.jpeg" alt="Скотч кольоровий"></div>
                     <div class="card-title">Скотч кольоровий</div>
                 </a>
-
                 <a href="office-skotch.html" class="category-card">
                     <div class="card-image"><img src="images/12на20.jpg" alt="Скотч канцелярський"></div>
                     <div class="card-title">Скотч канцелярський</div>
                 </a>
-
                <a href="logo-skotch.html" class="category-card">
                    <div class="card-image"><img src="images/Скотч с логотіпом.jpeg" alt="Скотч з логотипом"></div>
                    <div class="card-title">Скотч з логотипом</div>
                 </a>
-
                 <a href="reinforced-skotch.html" class="category-card">
                    <div class="card-image"><img src="images/Армований скотч.jpeg" alt="Скотч армований"></div>
                    <div class="card-title">Скотч армований</div>
                 </a>
-
                 <a href="malyarniy-skotch.html" class="category-card">
                   <div class="card-image"><img src="images/Малярський скотч.jpeg" alt="Скотч малярський"></div>
                   <div class="card-title">Скотч малярський</div>
                 </a>
-
                 <a href="stretch-prozoriy.html" class="category-card">
                  <div class="card-image"><img src="images/стрейч прозорій.jpeg" alt="Стрейч прозорий"></div>
                  <div class="card-title">Стрейч прозорий</div>
                 </a>
-
                 <a href="stretch-cherniy.html" class="category-card">
-    <div class="card-image"><img src="images/Черний150 – копія (3).jpg" alt="Стрейч чорний"></div>
-    <div class="card-title">Стрейч чорний</div>
-</a>
-
+                    <div class="card-image"><img src="images/Черний150 – копія (3).jpg" alt="Стрейч чорний"></div>
+                    <div class="card-title">Стрейч чорний</div>
+                </a>
                 <a href="#" class="category-card">
                     <div class="card-image"><img src="images/Плівка харчова.jpeg" alt="Харчова плівка"></div>
                     <div class="card-title">Харчова плівка</div>
                 </a>
-
                <a href="trash-bags.html" class="category-card">
-    <div class="card-image"><img src="images/Пакеті для сміття.jpeg" alt="Пакети для сміття"></div>
-    <div class="card-title">Пакети для сміття</div>
-</a>
-
+                    <div class="card-image"><img src="images/Пакеті для сміття.jpeg" alt="Пакети для сміття"></div>
+                    <div class="card-title">Пакети для сміття</div>
+                </a>
                 <a href="bubble-wrap.html" class="category-card">
-    <div class="card-image"><img src="images/Пупирка.jpeg" alt="Повітряно-пухирчаста плівка"></div>
-    <div class="card-title">Повітряно-пухирчаста плівка</div>
-</a>
-
+                    <div class="card-image"><img src="images/Пупирка.jpeg" alt="Повітряно-пухирчаста плівка"></div>
+                    <div class="card-title">Повітряно-пухирчаста плівка</div>
+                </a>
                 <a href="#" class="category-card">
                     <div class="card-image"><img src="images/Рукавиці робочі.jpeg" alt="Рукавиці робочі"></div>
                     <div class="card-title">Рукавиці робочі</div>
@@ -216,25 +323,152 @@
                 
             </div>
         </main>
-        
     </div>
 
     <!-- Плаваючі кнопки зв'язку -->
     <div class="floating-buttons">
-        <a href="tel:+380000000000" class="float-btn" title="Зателефонувати нам">
-            <svg fill="white" viewBox="0 0 24 24" width="28" height="28">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-            </svg>
-        </a>
-        <a href="https://t.me/ваш_телеграм" target="_blank" class="float-btn" title="Написати в месенджер">
+        
+        <!-- 1. Кнопка Чата (Зелена) -->
+        <button class="float-btn chat-btn-special" onclick="toggleChat()" title="Онлайн чат">
             <svg fill="white" viewBox="0 0 24 24" width="28" height="28">
                 <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
             </svg>
+        </button>
+
+        <!-- 2. Меню месенджерів (Синя кнопка, яка відкриває вибір) -->
+        <div class="messenger-menu-wrapper">
+            <button class="float-btn" onclick="toggleMessengerMenu(event)" title="Написати нам у месенджер">
+                <!-- Іконка "паперовий літачок" -->
+                <svg fill="white" viewBox="0 0 24 24" width="26" height="26">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+            
+            <!-- Випадаюче меню -->
+            <div class="messenger-menu" id="messengerMenu">
+                <!-- ВАЖЛИВО: для Viber завжди замінюйте + на %2B (наприклад %2B380990000000) -->
+                <a href="viber://chat?number=%2B380000000000" target="_blank">
+                    <svg class="icon-viber" viewBox="0 0 24 24" width="20" height="20">
+                        <path d="M19.14 17.5c-1.5 2.51-4.29 4.14-7.46 3.99-4.73-.23-8.5-4.14-8.5-8.87C3.18 7.82 7.04 3.96 11.82 4c4.66.04 8.5 3.93 8.35 8.61-.06 2.02-.75 3.88-1.89 5.39.81 1.76 2.65 3.19 2.76 3.27.18.14.07.41-.15.42-1.52.07-3.05-.28-4.25-1.07zm-1.63-2.67c.18-.32.06-.72-.25-.92-1.15-.75-2.52-1.07-3.83-.92-.35.04-.63.35-.61.7 0 .34.25.64.6.65 1.04.01 2.13.27 3.03.87.26.17.61.12.79-.17.15-.22.25-.49.27-.78v.57zM9.46 8.58c-.53-1.06-2.18-.46-2.61.64-.81 2.06.63 4.8 2.63 6.01 1.54.92 3.51.52 4.2-.95.34-.73-.24-1.66-1.11-1.39-.77.24-1.58-.2-1.86-.96-.28-.75.05-1.62.8-1.92.83-.34 1.25-1.37.7-2.13-.53-.74-1.28-1.31-2.09-1.63a3.52 3.52 3.52 0 0 0-.66.33z"/>
+                    </svg> Viber
+                </a>
+                <a href="https://t.me/ваш_телеграм" target="_blank">
+                    <svg class="icon-tg" viewBox="0 0 24 24" width="20" height="20">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.62-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg> Telegram
+                </a>
+                <a href="mailto:info@promaxpak.com.ua">
+                    <svg class="icon-mail" viewBox="0 0 24 24" width="20" height="20">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg> Email
+                </a>
+            </div>
+        </div>
+
+        <!-- 3. Дзвінок (Синя) -->
+        <a href="tel:+380000000000" class="float-btn" title="Зателефонувати нам">
+            <svg fill="white" viewBox="0 0 24 24" width="26" height="26">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
         </a>
+
+    </div>
+
+    <!-- ВИДЖЕТ ЧАТА (HTML) -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>Підтримка ProMaxPak</span>
+            <!-- Кнопка закриття викликає спеціальну функцію closeChat() -->
+            <button class="chat-close-btn" onclick="closeChat()">&times;</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message support">
+                Вітаємо! 👋 Чим ми можемо допомогти вам з вибором пакування?
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Введіть повідомлення..." onkeypress="handleChatPress(event)">
+            <button class="chat-send-btn" onclick="sendChatMessage()">Надіслати</button>
+        </div>
     </div>
 
     <!-- Підключення скрипта кошика -->
     <script src="cart.js"></script>
+
+    <!-- СКРИПТ ДЛЯ ЧАТА ТА МЕСЕНДЖЕРІВ -->
+    <script>
+        // 1. АВТОВІДКРИТТЯ ЧАТУ
+        document.addEventListener('DOMContentLoaded', () => {
+            // Перевіряємо, чи користувач не закривав чат власноруч у цій сесії
+            if (!sessionStorage.getItem('chatClosedByUser')) {
+                setTimeout(() => {
+                    document.getElementById('chatWindow').style.display = 'flex';
+                }, 5000); // Чат відкриється через 5 секунд після завантаження
+            }
+        });
+
+        // 2. ФУНКЦІЇ ВІКНА ЧАТУ
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            if (chatWindow.style.display === 'flex') {
+                closeChat(); // Якщо відкрито - закриваємо із запам'ятовуванням
+            } else {
+                chatWindow.style.display = 'flex';
+                document.getElementById('chatInput').focus();
+            }
+        }
+
+        function closeChat() {
+            document.getElementById('chatWindow').style.display = 'none';
+            // Запам'ятовуємо, що користувач не хоче бачити чат, щоб він більше не вистрибував
+            sessionStorage.setItem('chatClosedByUser', 'true');
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const chatBody = document.getElementById('chatBody');
+
+            // Додаємо повідомлення користувача
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-message user';
+            userMsg.textContent = text;
+            chatBody.appendChild(userMsg);
+
+            input.value = '';
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Заглушка відповіді
+            setTimeout(() => {
+                const supportMsg = document.createElement('div');
+                supportMsg.className = 'chat-message support';
+                supportMsg.textContent = 'Дякуємо! Ваше повідомлення надіслано менеджеру. Скоро ми відповімо.';
+                chatBody.appendChild(supportMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1000);
+        }
+
+        function handleChatPress(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        // 3. ФУНКЦІЇ МЕНЮ МЕСЕНДЖЕРІВ
+        function toggleMessengerMenu(e) {
+            e.stopPropagation(); // Зупиняємо клік, щоб меню відразу не закрилося
+            const menu = document.getElementById('messengerMenu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // Закривати меню месенджерів при кліку в будь-яке інше місце на екрані
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('messengerMenu');
+            if (menu && menu.style.display === 'flex' && !e.target.closest('.messenger-menu-wrapper')) {
+                menu.style.display = 'none';
+            }
+        });
+    </script>
 
 </body>
 </html>
