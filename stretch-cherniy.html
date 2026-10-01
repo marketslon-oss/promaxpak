@@ -61,6 +61,9 @@
         .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
         .item-sku span { color: #4B5563; font-weight: 700; }
         .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
+
+        .card-image img, .item-title { cursor: pointer; transition: opacity 0.2s; }
+        .card-image img:hover, .item-title:hover { opacity: 0.85; }
     </style>
 </head>
 <body>
@@ -92,19 +95,19 @@
         <aside class="sidebar">
             <h3>Каталог продукції</h3>
             <nav class="category-menu">
-    <a href="skotch.html">Скотч пакувальний</a>
-    <a href="color-skotch.html">Скотч кольоровий</a>
-    <a href="office-skotch.html">Скотч канцелярський</a>
-    <a href="logo-skotch.html">Скотч з логотипом</a>
-    <a href="reinforced-skotch.html">Скотч армований</a>
-    <a href="malyarniy-skotch.html">Скотч малярський</a>
-    <a href="stretch-prozoriy.html">Стрейч прозорий</a>
-    <a href="stretch-cherniy.html"class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Стрейч чорний</a>
-    <a href="#">Харчова плівка</a>
-    <a href="trash-bags.html">Пакети для сміття</a>
-    <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
-    <a href="#">Рукавиці робочі</a>
-</nav>
+                <a href="skotch.html">Скотч пакувальний</a>
+                <a href="color-skotch.html">Скотч кольоровий</a>
+                <a href="office-skotch.html">Скотч канцелярський</a>
+                <a href="logo-skotch.html">Скотч з логотипом</a>
+                <a href="reinforced-skotch.html">Скотч армований</a>
+                <a href="malyarniy-skotch.html">Скотч малярський</a>
+                <a href="stretch-prozoriy.html">Стрейч прозорий</a>
+                <a href="stretch-cherniy.html" class="active" style="background-color: #3B71CA !important; color: white !important; font-weight: bold; border-radius: 8px;">Стрейч чорний</a>
+                <a href="#">Харчова плівка</a>
+                <a href="trash-bags.html">Пакети для сміття</a>
+                <a href="bubble-wrap.html">Повітряно-пухирчаста плівка</a>
+                <a href="#">Рукавиці робочі</a>
+            </nav>
         </aside>
 
         <main class="content-area">
@@ -112,9 +115,21 @@
                 
                 <!-- Товар 1: 150 м -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Черний150 – копія (3).jpg" alt="Стрейч чорний 150м"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Стрейч плівка первинна Чорна 150 м х 20 мкм х 1.5 кг"
+                         data-price="208"
+                         data-boxqty="6"
+                         data-sku="022"
+                         data-img="images/Черний150 – копія (3).jpg"
+                         data-desc="Стрейч-плівка чорна — це надійна первинна стрейч-плівка, що використовується для пакування, захисту та фіксації вантажів. Забезпечує щільне прилягання, захищає від вологи, пилу та механічних пошкоджень, а також приховує вміст від сторонніх очей."
+                         data-advantages="Висока міцність та еластичність|Повна конфіденційність та захист від сонячних променів|Захищає від вологи, бруду та пошкоджень|Ідеальна для складів, переїздів та транспортування"
+                         data-specs="Товщина: 20 мкм | Довжина: 150 м | Ширина: 50 см | Вага: 1.5 кг | Упаковка: ящик 6 шт | Пре-стретч: 200-300% | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Черний150 – копія (3).jpg" alt="Стрейч чорний 150м">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Стрейч плівка первинна Чорна 150 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Стрейч плівка первинна Чорна 150 м
+                        </div>
                         <div class="item-sku">Код: <span>022</span></div>
                         <div class="item-desc">Надійна чорна стрейч-плівка. Забезпечує конфіденційність вмісту пакування та надійну фіксацію вантажів.</div>
                         <div class="item-specs"><p>📏 150 м х 20 мкм х 1.5 кг</p><p>📦 В ящику: 6 шт</p></div>
@@ -129,9 +144,21 @@
 
                 <!-- Товар 2: 200 м -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Черний200.jpg" alt="Стрейч чорний 200м"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Стрейч плівка первинна Чорна 200 м х 20 мкм х 1.8 кг"
+                         data-price="240"
+                         data-boxqty="6"
+                         data-sku="005"
+                         data-img="images/Черний200.jpg"
+                         data-desc="Стрейч-плівка чорна — це надійна первинна стрейч-плівка, що використовується для пакування, захисту та фіксації вантажів. Забезпечує щільне прилягання, захищає від вологи, пилу та механічних пошкоджень."
+                         data-advantages="Висока міцність та еластичність|Повна конфіденційність та захист від сонячних променів|Захищає від вологи, бруду та пошкоджень|Ідеальна для складів, переїздів та транспортування"
+                         data-specs="Товщина: 20 мкм | Довжина: 200 м | Ширина: 50 см | Вага: 1.8 кг | Упаковка: ящик 6 шт | Пре-стретч: 200-300% | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Черний200.jpg" alt="Стрейч чорний 200м">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Стрейч плівка первинна Чорна 200 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Стрейч плівка первинна Чорна 200 м
+                        </div>
                         <div class="item-sku">Код: <span>005</span></div>
                         <div class="item-desc">Оптимальний вибір для пакування та захисту товарів від сонячних променів та сторонніх очей.</div>
                         <div class="item-specs"><p>📏 200 м х 20 мкм х 1.8 кг</p><p>📦 В ящику: 6 шт</p></div>
@@ -146,9 +173,21 @@
 
                 <!-- Товар 3: 300 м -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Черний300.jpg" alt="Стрейч чорний 300м"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Стрейч плівка первинна Чорна 300 м х 20 мкм х 2.5 кг"
+                         data-price="315"
+                         data-boxqty="6"
+                         data-sku="009"
+                         data-img="images/Черний300.jpg"
+                         data-desc="Стрейч-плівка чорна — це надійна первинна стрейч-плівка, що використовується для пакування, захисту та фіксації вантажів. Забезпечує щільне прилягання, захищає від вологи, пилу та механічних пошкоджень."
+                         data-advantages="Висока міцність та еластичність|Повна конфіденційність та захист від сонячних променів|Захищає від вологи, бруду та пошкоджень|Ідеальна для складів, переїздів та транспортування"
+                         data-specs="Товщина: 20 мкм | Довжина: 300 м | Ширина: 50 см | Вага: 2.5 кг | Упаковка: ящик 6 шт | Пре-стретч: 200-300% | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Черний300.jpg" alt="Стрейч чорний 300м">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Стрейч плівка первинна Чорна 300 м</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Стрейч плівка первинна Чорна 300 м
+                        </div>
                         <div class="item-sku">Код: <span>009</span></div>
                         <div class="item-desc">Максимальна намотка для інтенсивного складу. Гарантує економічність та повне приховування упакованого вантажу.</div>
                         <div class="item-specs"><p>📏 300 м х 20 мкм х 2.5 кг</p><p>📦 В ящику: 6 шт</p></div>
@@ -161,11 +200,23 @@
                     </div>
                 </div>
 
-               <!-- Товар 4: Короткий / Вузький 250 мм (перенесено в кінець) -->
+               <!-- Товар 4: Короткий / Вузький 250 мм -->
                 <div class="item-card">
-                    <div class="card-image"><img src="images/Черний250.jpg" alt="Стрейч чорний короткий 250мм"></div>
+                    <div class="card-image" onclick="openProductModalFromCard(this)"
+                         data-title="Стрейч плівка первинна Чорна 250 мм х 200 м (короткий ролик) х 0.9 кг"
+                         data-price="135"
+                         data-boxqty="12"
+                         data-sku="007"
+                         data-img="images/Черний250.jpg"
+                         data-desc="Стрейч-плівка чорна — це надійна первинна стрейч-плівка, що використовується для пакування, захисту та фіксації вантажів. Забезпечує щільне прилягання, захищає від вологи, пилу та механічних пошкоджень."
+                         data-advantages="Висока міцність та еластичність|Повна конфіденційність при пакуванні посилок|Зручна у використанні, легко тягнеться|Ідеальна для ручного пакування"
+                         data-specs="Довжина: 200 м | Ширина: 250 мм | Товщина: 20 мкм | Вага: 0.9 кг | Упаковка: ящик 12 шт | Пре-стретч: 200-300% | Доставка: Безкоштовна доставка Новою Поштою по Україні" style="cursor: pointer;">
+                        <img src="images/Черний250.jpg" alt="Стрейч чорний короткий 250мм">
+                    </div>
                     <div class="item-info">
-                        <div class="item-title">Стрейч плівка первинна Чорна 250 мм х 200 м (короткий ролик)</div>
+                        <div class="item-title" onclick="openProductModalFromCard(this.closest('.item-card').querySelector('.card-image'))">
+                            Стрейч плівка первинна Чорна 250 мм х 200 м (короткий ролик)
+                        </div>
                         <div class="item-sku">Код: <span>007</span></div>
                         <div class="item-desc">Вузький (короткий) рулон стрейч-плівки. Зручний для ручного пакування дрібних товарів, коробок та посилок.</div>
                         <div class="item-specs"><p>📏 250 мм х 200 м х 20 мкм х 0.9 кг</p><p>📦 В ящику: 12 шт</p></div>
