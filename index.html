@@ -222,6 +222,47 @@
             background-color: #10B981; color: white; border: none; padding: 0 15px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: background 0.2s;
         }
         .chat-send-btn:hover { background-color: #059669; }
+
+        /* --- ЗМЕНШЕНІ Стилі для рекламного блоку marketslon --- */
+        .marketslon-promo {
+            max-width: 600px;
+            margin: 30px auto 20px auto;
+            background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+            border: 1px solid #DBEAFE;
+            border-radius: 8px;
+            padding: 12px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+            font-family: 'Inter', sans-serif;
+        }
+        .marketslon-promo p {
+            margin: 0 0 6px 0;
+            color: #374151;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+        .marketslon-promo .promo-highlight {
+            font-weight: 700;
+            color: #1E40AF;
+        }
+        .marketslon-promo .promo-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .marketslon-promo a {
+            color: #2563EB;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+        .marketslon-promo a:hover {
+            color: #1D4ED8;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -321,6 +362,16 @@
                 </a>
                 
             </div>
+
+            <!-- Зменшений рекламний блок marketslon -->
+            <div class="marketslon-promo">
+                <p>Сайт розроблено компанією <span class="promo-highlight">marketslon</span>.</p>
+                <p>З питань розробки сайтів, Telegram-ботів або CRM-систем звертайтесь:</p>
+                <div class="promo-contacts">
+                    <a href="tg://resolve?domain=A_max_N" target="_blank">Telegram: @A_max_N</a>
+                    <a href="mailto:marketslon@gmail.com">Email: marketslon@gmail.com</a>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -337,13 +388,11 @@
         <!-- 2. Меню месенджерів (Синя кнопка, яка відкриває вибір) -->
         <div class="messenger-menu-wrapper">
             <button class="float-btn" onclick="toggleMessengerMenu(event)" title="Написати нам у месенджер">
-                <!-- Іконка "паперовий літачок" -->
                 <svg fill="white" viewBox="0 0 24 24" width="26" height="26">
                     <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
                 </svg>
             </button>
             
-            <!-- Випадаюче меню -->
             <div class="messenger-menu" id="messengerMenu">
                 <a href="viber://chat?number=%2B380000000000" target="_blank">
                     <svg class="icon-viber" viewBox="0 0 24 24" width="20" height="20">
@@ -351,7 +400,6 @@
                     </svg> Viber
                 </a>
                 
-                <!-- Посилання на Telegram через ваш нікнейм -->
                 <a href="tg://resolve?domain=A_max_N" target="_blank">
                     <svg class="icon-tg" viewBox="0 0 24 24" width="20" height="20">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.62-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
@@ -379,7 +427,6 @@
     <div class="chat-window" id="chatWindow">
         <div class="chat-header">
             <span>Підтримка ProMaxPak</span>
-            <!-- Кнопка закриття викликає спеціальну функцію closeChat() -->
             <button class="chat-close-btn" onclick="closeChat()">&times;</button>
         </div>
         <div class="chat-body" id="chatBody">
@@ -398,21 +445,18 @@
 
     <!-- СКРИПТ ДЛЯ ЧАТА ТА МЕСЕНДЖЕРІВ -->
     <script>
-        // 1. АВТОВІДКРИТТЯ ЧАТУ
         document.addEventListener('DOMContentLoaded', () => {
-            // Перевіряємо, чи користувач не закривав чат власноруч у цій сесії
             if (!sessionStorage.getItem('chatClosedByUser')) {
                 setTimeout(() => {
                     document.getElementById('chatWindow').style.display = 'flex';
-                }, 5000); // Чат відкриється через 5 секунд після завантаження
+                }, 5000); 
             }
         });
 
-        // 2. ФУНКЦІЇ ВІКНА ЧАТУ
         function toggleChat() {
             const chatWindow = document.getElementById('chatWindow');
             if (chatWindow.style.display === 'flex') {
-                closeChat(); // Якщо відкрито - закриваємо із запам'ятовуванням
+                closeChat(); 
             } else {
                 chatWindow.style.display = 'flex';
                 document.getElementById('chatInput').focus();
@@ -421,7 +465,6 @@
 
         function closeChat() {
             document.getElementById('chatWindow').style.display = 'none';
-            // Запам'ятовуємо, що користувач не хоче бачити чат, щоб він більше не вистрибував
             sessionStorage.setItem('chatClosedByUser', 'true');
         }
 
@@ -431,8 +474,6 @@
             if (!text) return;
 
             const chatBody = document.getElementById('chatBody');
-
-            // Додаємо повідомлення користувача
             const userMsg = document.createElement('div');
             userMsg.className = 'chat-message user';
             userMsg.textContent = text;
@@ -441,7 +482,6 @@
             input.value = '';
             chatBody.scrollTop = chatBody.scrollHeight;
 
-            // Заглушка відповіді
             setTimeout(() => {
                 const supportMsg = document.createElement('div');
                 supportMsg.className = 'chat-message support';
@@ -455,14 +495,12 @@
             if (e.key === 'Enter') sendChatMessage();
         }
 
-        // 3. ФУНКЦІЇ МЕНЮ МЕСЕНДЖЕРІВ
         function toggleMessengerMenu(e) {
-            e.stopPropagation(); // Зупиняємо клік, щоб меню відразу не закрилося
+            e.stopPropagation(); 
             const menu = document.getElementById('messengerMenu');
             menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // Закривати меню месенджерів при кліку в будь-яке інше місце на екрані
         document.addEventListener('click', (e) => {
             const menu = document.getElementById('messengerMenu');
             if (menu && menu.style.display === 'flex' && !e.target.closest('.messenger-menu-wrapper')) {
