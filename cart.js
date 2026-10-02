@@ -5,6 +5,15 @@ function injectCartHTML() {
 
     const cartHTML = `
     <style>
+        /* ГАРАНТИЯ ОТОБРАЖЕНИЯ: Базовые стили модального окна вшиты в скрипт */
+        .cart-modal { position: fixed !important; z-index: 2000 !important; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
+        .cart-modal-content-large { background-color: #F8F9FA; color: #1F2937; width: 100%; max-width: 750px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); position: relative; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
+        .checkout-top-bar { display: flex; justify-content: space-between; align-items: center; background-color: #FFFFFF; padding: 20px 25px; border-bottom: 1px solid #E5E7EB; }
+        .checkout-top-bar h2 { font-size: 1.4rem; color: #111827; margin: 0; }
+        .close-cart { background: none; border: none; font-size: 24px; cursor: pointer; color: #6B7280; padding: 0; }
+        .close-cart:hover { color: #111827; }
+        .checkout-scroll-body { padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
+
         .product-modal-grid {
             display: grid;
             grid-template-columns: 1fr 1.2fr;
@@ -20,24 +29,12 @@ function injectCartHTML() {
             overflow: hidden;
             width: 100%;
             box-sizing: border-box;
-            
-            /* ЗАЩИТА ОТ СПЛЮЩИВАНИЯ НА МОБИЛЬНОМ */
+            /* Защита от сплющивания на мобильных */
             flex-shrink: 0; 
             min-height: 250px; 
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .modal-product-image {
-            max-height: 230px; 
-            max-width: 100%; 
-            border-radius: 6px; 
-            object-fit: contain; 
-            transition: transform 0.4s ease; 
-            cursor: zoom-in; 
-            transform-origin: center center; 
-            user-select: none; 
-            -webkit-user-drag: none;
         }
         @media (max-width: 768px) {
             .product-modal-grid {
@@ -53,12 +50,6 @@ function injectCartHTML() {
             }
             .checkout-scroll-body {
                 padding: 15px;
-            }
-            .product-modal-img-box {
-                min-height: 280px; /* Даем картинке больше места на телефоне */
-            }
-            .modal-product-image {
-                max-height: 260px;
             }
         }
     </style>
@@ -196,11 +187,10 @@ function injectCartHTML() {
                 <h2 id="modalProductTitle" style="font-size: 1.15rem; font-weight: 700;">Деталі товару</h2>
                 <button class="close-cart" onclick="closeProductModal()">&times;</button>
             </div>
-            
             <div class="checkout-scroll-body product-modal-grid">
                 
                 <div class="product-modal-img-box">
-                    <img id="modalProductImg" class="modal-product-image" src="" alt="" 
+                    <img id="modalProductImg" src="" alt="" style="max-height: 250px; max-width: 100%; border-radius: 6px; object-fit: contain; transition: transform 0.4s ease; cursor: zoom-in; transform-origin: center center; user-select: none; -webkit-user-drag: none;" 
                          onmouseenter="this.style.transform='scale(1.6)'" 
                          onmouseleave="this.style.transform='scale(1)'">
                 </div>
@@ -437,7 +427,85 @@ window.onclick = function(event) {
     }
 }
 
+// ==========================================
+// ЛОГІКА ДЛЯ ЧАТУ ТА МЕСЕНДЖЕРІВ
+// ==========================================
+
 document.addEventListener('DOMContentLoaded', () => {
     injectCartHTML();
     updateCartUI();
+
+    // Автоматичне відкриття чату через 5 секунд (якщо не закривали)
+    if (!sessionStorage.getItem('chatClosedByUser')) {
+        setTimeout(() => {
+            const chatWindow = document.getElementById('chatWindow');
+            if (chatWindow) chatWindow.style.display = 'flex';
+        }, 5000); 
+    }
+});
+
+function toggleChat() {
+    const chatWindow = document.getElementById('chatWindow');
+    if (chatWindow) {
+        if (chatWindow.style.display === 'flex') {
+            closeChat(); 
+        } else {
+            chatWindow.style.display = 'flex';
+            const chatInput = document.getElementById('chatInput');
+            if (chatInput) chatInput.focus();
+        }
+    }
+}
+
+function closeChat() {
+    const chatWindow = document.getElementById('chatWindow');
+    if (chatWindow) {
+        chatWindow.style.display = 'none';
+        sessionStorage.setItem('chatClosedByUser', 'true');
+    }
+}
+
+function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    if (!input) return;
+    const text = input.value.trim();
+    if (!text) return;
+
+    const chatBody = document.getElementById('chatBody');
+    if (!chatBody) return;
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message user';
+    userMsg.textContent = text;
+    chatBody.appendChild(userMsg);
+
+    input.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    setTimeout(() => {
+        const supportMsg = document.createElement('div');
+        supportMsg.className = 'chat-message support';
+        supportMsg.textContent = 'Дякуємо! Ваше повідомлення надіслано менеджеру. Скоро ми відповімо.';
+        chatBody.appendChild(supportMsg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }, 1000);
+}
+
+function handleChatPress(e) {
+    if (e.key === 'Enter') sendChatMessage();
+}
+
+function toggleMessengerMenu(e) {
+    e.stopPropagation(); 
+    const menu = document.getElementById('messengerMenu');
+    if (menu) {
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+}
+
+document.addEventListener('click', (e) => {
+    const menu = document.getElementById('messengerMenu');
+    if (menu && menu.style.display === 'flex' && !e.target.closest('.messenger-menu-wrapper')) {
+        menu.style.display = 'none';
+    }
 });
