@@ -206,6 +206,7 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .card-image img {
@@ -213,6 +214,11 @@ body {
     height: 100%;
     object-fit: contain; 
     padding: 10px; 
+    transition: opacity 0.2s;
+}
+
+.card-image img:hover {
+    opacity: 0.85;
 }
 
 .item-info {
@@ -226,6 +232,31 @@ body {
     font-weight: 600;
     color: #1F2937;
     font-size: 0.95rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.item-title:hover {
+    opacity: 0.85;
+}
+
+/* Виправлені стилі для коду та опису товарів */
+.item-sku {
+    font-size: 0.85rem;
+    color: #6B7280;
+    margin-bottom: 6px;
+}
+
+.item-sku span {
+    color: #1F2937;
+    font-weight: 700;
+}
+
+.item-desc {
+    font-size: 0.85rem;
+    color: #4B5563;
     margin-bottom: 12px;
     line-height: 1.4;
 }
@@ -865,14 +896,12 @@ body {
    ========================================= */
 
 @media (max-width: 1024px) {
-    /* На планшетах показуємо по 2 товари в ряд */
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
-    /* 1. Шапка сайта и макет */
     .top-header { flex-direction: column; padding: 15px; gap: 15px; text-align: center; }
     .main-nav { flex-wrap: wrap; justify-content: center; gap: 12px; }
     
@@ -897,7 +926,6 @@ body {
         box-shadow: none; 
     }
 
-    /* 2. Свайп-меню категорий с визуальным "засветом" (градиент справа) */
     .sidebar h3 {
         font-size: 1rem;
         margin-bottom: 10px;
@@ -911,7 +939,6 @@ body {
         gap: 10px !important;
         padding: 0 15px 10px 5px !important;
         -webkit-overflow-scrolling: touch;
-        /* Эффект растворения правого края (подсказка для свайпа) */
         mask-image: linear-gradient(to right, black 85%, transparent 100%);
         -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
     }
@@ -935,7 +962,6 @@ body {
         background-color: var(--accent-blue) !important;
     }
 
-    /* 3. ТОВАРЫ: ПЛОТНАЯ СЕТКА 2 В РЯД */
     .product-grid { 
         grid-template-columns: repeat(2, 1fr); 
         gap: 8px; 
@@ -998,7 +1024,6 @@ body {
         background-color: #3da139; 
     }
 
-    /* 4. Мобильная корзина и кнопки связи */
     .checkout-grid-2, .payment-options-grid, .cart-actions-grid, .checkout-bottom-actions { 
         grid-template-columns: 1fr; 
     }
