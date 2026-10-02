@@ -6,65 +6,6 @@
     <title>Скотч пакувальний — ProMaxPak</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        .cart-modal { position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; display: none; }
-        .cart-modal-content-large { background-color: #F8F9FA; color: #1F2937; width: 100%; max-width: 750px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); position: relative; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
-        .checkout-top-bar { display: flex; justify-content: space-between; align-items: center; background-color: #FFFFFF; padding: 20px 25px; border-bottom: 1px solid #E5E7EB; }
-        .checkout-top-bar h2 { font-size: 1.4rem; color: #111827; }
-        .close-cart { background: none; border: none; font-size: 24px; cursor: pointer; color: #6B7280; }
-        .close-cart:hover { color: #111827; }
-        .checkout-scroll-body { padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
-        .section-title-num { font-size: 1.1rem; font-weight: 700; color: #374151; margin-bottom: 15px; }
-        .checkout-section-box { background-color: #FFFFFF; border: 2px solid #E5E7EB; border-radius: 10px; padding: 20px; }
-        .step-title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
-        .step-badge { background-color: #65A30D; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.95rem; }
-        .step-title-row h3 { font-size: 1.1rem; color: #111827; }
-        .checkout-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .form-group-pro { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
-        .form-group-pro label { font-size: 0.9rem; font-weight: 600; color: #4B5563; }
-        .form-group-pro input, .form-group-pro textarea { width: 100%; padding: 12px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 1rem; outline: none; background-color: #FFF; transition: all 0.2s; }
-        .form-group-pro input:focus, .form-group-pro textarea:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(59, 113, 202, 0.15); }
-        .delivery-card-option { display: flex; align-items: flex-start; gap: 12px; border: 2px solid #65A30D; background-color: #F7FEE7; padding: 15px; border-radius: 8px; }
-        .delivery-card-info { flex-grow: 1; }
-        .delivery-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-        .delivery-name { font-weight: 700; color: #1F2937; }
-        .badge-free { background-color: #DCFCE7; color: #166534; padding: 2px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; }
-        .delivery-desc { font-size: 0.85rem; color: #4B5563; }
-        .payment-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .payment-card { display: flex; align-items: center; gap: 10px; border: 2px solid #E5E7EB; background-color: #FFFFFF; padding: 15px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-        .payment-card:hover { border-color: var(--accent-blue); }
-        .payment-card-content { display: flex; align-items: center; gap: 12px; font-weight: 600; color: #1F2937; }
-        .btn-checkout-primary { background-color: #10B981; color: white; border: none; padding: 14px 20px; border-radius: 8px; font-size: 1.05rem; font-weight: 700; cursor: pointer; width: 100%; text-align: center; transition: background 0.2s; }
-        .btn-checkout-primary:hover { background-color: #059669; }
-        .btn-back-cart { background-color: #E5E7EB; color: #374151; border: none; padding: 14px 20px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-        .btn-back-cart:hover { background-color: #D1D5DB; }
-        .checkout-bottom-actions { display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-top: 10px; }
-        .cart-footer-box { background-color: #FFFFFF; border: 1px solid #E5E7EB; padding: 20px; border-radius: 10px; display: flex; flex-direction: column; gap: 15px; }
-        .cart-total { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; color: #111827; }
-        .free-shipping-notice { display: flex; align-items: center; justify-content: center; gap: 8px; background-color: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; padding: 10px; border-radius: 6px; font-weight: 600; font-size: 0.95rem; }
-        .cart-items-list { overflow-y: auto; max-height: 330px; display: flex; flex-direction: column; gap: 12px; }
-        .cart-item-row { display: flex; justify-content: space-between; align-items: center; background-color: #F9FAFB; padding: 12px 15px; border-radius: 8px; border: 1px solid #E5E7EB; }
-        .cart-item-details { flex-grow: 1; padding-right: 15px; }
-        .cart-item-title { font-weight: 600; font-size: 0.95rem; color: #1F2937; }
-        .cart-item-specs-sub { font-size: 0.8rem; color: #6B7280; margin-top: 2px; }
-        .cart-item-price { font-size: 0.9rem; color: #374151; margin-top: 4px; }
-        .cart-item-controls { display: flex; align-items: center; gap: 10px; }
-        .qty-btn { background-color: #E5E7EB; border: none; width: 26px; height: 26px; border-radius: 4px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .qty-btn:hover { background-color: #D1D5DB; }
-        .remove-btn { background: none; border: none; color: #EF4444; cursor: pointer; font-size: 0.85rem; margin-left: 10px; }
-        .remove-btn:hover { text-decoration: underline; }
-        .empty-cart-msg { text-align: center; color: #6B7280; padding: 20px 0; }
-        .cart-wrapper { position: relative; display: flex; align-items: center; text-decoration: none; transition: transform 0.2s; cursor: pointer; }
-        .cart-wrapper:hover { transform: scale(1.1); }
-        .cart-counter { position: absolute; top: -8px; right: -10px; background-color: #EF4444; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; min-width: 20px; text-align: center; }
-        
-        .item-sku { font-size: 0.85rem; color: #9CA3AF; margin-bottom: 6px; }
-        .item-sku span { color: #4B5563; font-weight: 700; }
-        .item-desc { font-size: 0.85rem; color: #4B5563; margin-bottom: 12px; line-height: 1.4; }
-        
-        .card-image img, .item-title { cursor: pointer; transition: opacity 0.2s; }
-        .card-image img:hover, .item-title:hover { opacity: 0.85; }
-    </style>
 </head>
 <body>
 
@@ -230,21 +171,80 @@
                 </div>
                 
             </div>
+
+            <!-- Рекламний блок marketslon -->
+            <div class="marketslon-promo">
+                <p>Сайт розроблено компанією <span class="promo-highlight">marketslon</span>.</p>
+                <p>З питань розробки сайтів, Telegram-ботів або CRM-систем звертайтесь:</p>
+                <div class="promo-contacts">
+                    <a href="tg://resolve?domain=A_max_N" target="_blank">Telegram: @A_max_N</a>
+                    <a href="mailto:marketslon@gmail.com">Email: marketslon@gmail.com</a>
+                </div>
+            </div>
+
         </main>
     </div>
 
     <!-- Плаваючі кнопки зв'язку -->
     <div class="floating-buttons">
-        <a href="tel:+380000000000" class="float-btn" title="Зателефонувати нам">
-            <svg fill="white" viewBox="0 0 24 24" width="28" height="28">
-                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-            </svg>
-        </a>
-        <a href="https://t.me/ваш_телеграм" target="_blank" class="float-btn" title="Написати в месенджер">
+        
+        <button class="float-btn chat-btn-special" onclick="toggleChat()" title="Онлайн чат">
             <svg fill="white" viewBox="0 0 24 24" width="28" height="28">
                 <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
             </svg>
+        </button>
+
+        <div class="messenger-menu-wrapper">
+            <button class="float-btn" onclick="toggleMessengerMenu(event)" title="Написати нам у месенджер">
+                <svg fill="white" viewBox="0 0 24 24" width="26" height="26">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                </svg>
+            </button>
+            
+            <div class="messenger-menu" id="messengerMenu">
+                <a href="viber://chat?number=%2B380000000000" target="_blank">
+                    <svg class="icon-viber" viewBox="0 0 24 24" width="20" height="20">
+                        <path d="M19.14 17.5c-1.5 2.51-4.29 4.14-7.46 3.99-4.73-.23-8.5-4.14-8.5-8.87C3.18 7.82 7.04 3.96 11.82 4c4.66.04 8.5 3.93 8.35 8.61-.06 2.02-.75 3.88-1.89 5.39.81 1.76 2.65 3.19 2.76 3.27.18.14.07.41-.15.42-1.52.07-3.05-.28-4.25-1.07zm-1.63-2.67c.18-.32.06-.72-.25-.92-1.15-.75-2.52-1.07-3.83-.92-.35.04-.63.35-.61.7 0 .34.25.64.6.65 1.04.01 2.13.27 3.03.87.26.17.61.12.79-.17.15-.22.25-.49.27-.78v.57zM9.46 8.58c-.53-1.06-2.18-.46-2.61.64-.81 2.06.63 4.8 2.63 6.01 1.54.92 3.51.52 4.2-.95.34-.73-.24-1.66-1.11-1.39-.77.24-1.58-.2-1.86-.96-.28-.75.05-1.62.8-1.92.83-.34 1.25-1.37.7-2.13-.53-.74-1.28-1.31-2.09-1.63a3.52 3.52 3.52 0 0 0-.66.33z"/>
+                    </svg> Viber
+                </a>
+                
+                <a href="tg://resolve?domain=A_max_N" target="_blank">
+                    <svg class="icon-tg" viewBox="0 0 24 24" width="20" height="20">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.62-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg> Telegram
+                </a>
+                
+                <a href="mailto:info@promaxpak.com.ua">
+                    <svg class="icon-mail" viewBox="0 0 24 24" width="20" height="20">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg> Email
+                </a>
+            </div>
+        </div>
+
+        <a href="tel:+380000000000" class="float-btn" title="Зателефонувати нам">
+            <svg fill="white" viewBox="0 0 24 24" width="26" height="26">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
         </a>
+
+    </div>
+
+    <!-- ВИДЖЕТ ЧАТА -->
+    <div class="chat-window" id="chatWindow">
+        <div class="chat-header">
+            <span>Підтримка ProMaxPak</span>
+            <button class="chat-close-btn" onclick="closeChat()">&times;</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message support">
+                Вітаємо! 👋 Чим ми можемо допомогти вам з вибором пакування?
+            </div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInput" placeholder="Введіть повідомлення..." onkeypress="handleChatPress(event)">
+            <button class="chat-send-btn" onclick="sendChatMessage()">Надіслати</button>
+        </div>
     </div>
 
     <script src="cart.js"></script>
