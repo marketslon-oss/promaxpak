@@ -1,11 +1,11 @@
 let cart = JSON.parse(localStorage.getItem('promaxpak_cart')) || [];
+const NP_API_KEY = '7dbda2a14b42158ebef8066b2f396262'; // Ваш API-ключ Нової Пошти
 
 function injectCartHTML() {
     if (document.getElementById('cartModal')) return; 
 
     const cartHTML = `
     <style>
-        /* ГАРАНТИЯ ОТОБРАЖЕНИЯ: Базовые стили модального окна вшиты в скрипт */
         .cart-modal { position: fixed !important; z-index: 2000 !important; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
         .cart-modal-content-large { background-color: #F8F9FA; color: #1F2937; width: 100%; max-width: 750px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.3); position: relative; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
         .checkout-top-bar { display: flex; justify-content: space-between; align-items: center; background-color: #FFFFFF; padding: 20px 25px; border-bottom: 1px solid #E5E7EB; }
@@ -14,43 +14,23 @@ function injectCartHTML() {
         .close-cart:hover { color: #111827; }
         .checkout-scroll-body { padding: 25px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
 
-        .product-modal-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 20px;
-            align-items: start;
-        }
-        .product-modal-img-box {
-            background: #FFFFFF;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #E5E7EB;
-            text-align: center;
-            overflow: hidden;
-            width: 100%;
-            box-sizing: border-box;
-            /* Защита от сплющивания на мобильных */
-            flex-shrink: 0; 
-            min-height: 250px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .product-modal-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; align-items: start; }
+        .product-modal-img-box { background: #FFFFFF; padding: 15px; border-radius: 8px; border: 1px solid #E5E7EB; text-align: center; overflow: hidden; width: 100%; box-sizing: border-box; flex-shrink: 0; min-height: 250px; display: flex; align-items: center; justify-content: center; }
+        
+        /* Стилі для Нової Пошти */
+        .autocomplete-wrapper { position: relative; width: 100%; }
+        .autocomplete-list { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #E5E7EB; border-radius: 8px; max-height: 250px; overflow-y: auto; z-index: 1000; list-style: none; padding: 0; margin: 4px 0 0 0; box-shadow: 0 10px 25px rgba(0,0,0,0.15); display: none; }
+        .autocomplete-list li { padding: 12px 15px; cursor: pointer; border-bottom: 1px solid #F3F4F6; font-size: 0.95rem; color: #374151; transition: background 0.2s; }
+        .autocomplete-list li:hover { background-color: #F3F4F6; color: #3B71CA; }
+        .autocomplete-list li:last-child { border-bottom: none; }
+        
+        select.np-select { width: 100%; padding: 14px 15px; border: 1px solid #D1D5DB; border-radius: 8px; font-size: 1rem; background-color: #FFFFFF; color: #1F2937; cursor: pointer; appearance: auto; }
+        select.np-select:disabled { background-color: #F3F4F6; color: #9CA3AF; cursor: not-allowed; }
+
         @media (max-width: 768px) {
-            .product-modal-grid {
-                display: flex !important;
-                flex-direction: column !important;
-                gap: 15px !important;
-            }
-            .cart-modal-content-large {
-                max-width: 100% !important;
-                height: 100vh;
-                max-height: 100vh;
-                border-radius: 0 !important;
-            }
-            .checkout-scroll-body {
-                padding: 15px;
-            }
+            .product-modal-grid { display: flex !important; flex-direction: column !important; gap: 15px !important; }
+            .cart-modal-content-large { max-width: 100% !important; height: 100vh; max-height: 100vh; border-radius: 0 !important; }
+            .checkout-scroll-body { padding: 15px; }
         }
     </style>
 
@@ -121,18 +101,22 @@ function injectCartHTML() {
                                     <span class="delivery-name">🔴 Нова Пошта</span>
                                     <span class="badge-free">Безкоштовно</span>
                                 </div>
-                                <p class="delivery-desc">У відділення або поштомат Нової Пошти по Україні</p>
+                                <p class="delivery-desc">У відділення або поштомат по Україні</p>
                             </div>
                         </label>
 
                         <div class="checkout-grid-2" style="margin-top: 15px;">
-                            <div class="form-group-pro">
+                            <div class="form-group-pro autocomplete-wrapper">
                                 <label>Населений пункт (Місто) *</label>
-                                <input type="text" id="orderCity" placeholder="Наприклад: Кропивницький">
+                                <input type="text" id="orderCity" placeholder="Почніть вводити назву міста..." autocomplete="off">
+                                <ul id="citySearchResults" class="autocomplete-list"></ul>
+                                <input type="hidden" id="orderCityRef">
                             </div>
                             <div class="form-group-pro">
-                                <label>Номер відділення або поштомату *</label>
-                                <input type="text" id="orderWarehouse" placeholder="Наприклад: Відділення №1">
+                                <label>Відділення або поштомат *</label>
+                                <select id="orderWarehouse" class="np-select" disabled>
+                                    <option value="">Спочатку оберіть місто</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -211,6 +195,7 @@ function injectCartHTML() {
     `;
     
     document.body.insertAdjacentHTML('beforeend', cartHTML);
+    initNovaPoshtaAPI(); // Запуск інтеграції Нової Пошти після рендеру
 }
 
 function saveCart() {
@@ -325,12 +310,17 @@ function submitOrder() {
     let lastName = document.getElementById('orderLastName').value.trim();
     let firstName = document.getElementById('orderFirstName').value.trim();
     let city = document.getElementById('orderCity').value.trim();
-    let warehouse = document.getElementById('orderWarehouse').value.trim();
+    
+    // Отримуємо обране відділення
+    let warehouseSelect = document.getElementById('orderWarehouse');
+    let warehouseRef = warehouseSelect.value;
+    let warehouseName = warehouseSelect.options[warehouseSelect.selectedIndex]?.text || '';
+    
     let comment = document.getElementById('orderComment').value.trim();
     let payment = document.querySelector('input[name="orderPayment"]:checked').value;
 
-    if (!phone || !lastName || !firstName || !city || !warehouse) {
-        alert('Будь ласка, заповніть усі обов’язкові поля форми!');
+    if (!phone || !lastName || !firstName || !city || !warehouseRef) {
+        alert('Будь ласка, заповніть усі обов’язкові поля та оберіть відділення Нової Пошти!');
         return;
     }
 
@@ -340,13 +330,13 @@ function submitOrder() {
     }).join('\n');
 
     let totalPrice = cart.reduce((sum, item) => sum + (item.pricePerItem * item.boxQty * item.boxes), 0);
-    
     let commentText = comment ? `\nКоментар: ${comment}` : '';
 
+    // В майбутньому ми будемо відправляти "warehouseRef" в CRM (API SalesDrive)
     let finalMessage = `✅ НОВЕ ЗАМОВЛЕННЯ\n\n` +
                         `👤 Клієнт: ${lastName} ${firstName}\n` +
                         `📞 Телефон: ${phone}\n` +
-                        `🚚 Доставка: НП, м. ${city}, ${warehouse}\n` +
+                        `🚚 Доставка: ${city}, ${warehouseName}\n` +
                         `💳 Оплата: ${payment}${commentText}\n\n` +
                         `🛒 ТОВАРИ:\n${orderDetailsList}\n\n` +
                         `💰 ЗАГАЛЬНА СУМА: ${totalPrice} ₴`;
@@ -428,14 +418,148 @@ window.onclick = function(event) {
 }
 
 // ==========================================
+// ЛОГІКА ІНТЕГРАЦІЇ НОВОЇ ПОШТИ
+// ==========================================
+let npSearchTimeout = null;
+
+function initNovaPoshtaAPI() {
+    const cityInput = document.getElementById('orderCity');
+    if (!cityInput) return;
+
+    // Слухаємо ввід тексту в поле "Місто"
+    cityInput.addEventListener('input', function() {
+        clearTimeout(npSearchTimeout);
+        const query = this.value.trim();
+        const resultsList = document.getElementById('citySearchResults');
+        
+        if (query.length < 2) {
+            resultsList.style.display = 'none';
+            document.getElementById('orderWarehouse').disabled = true;
+            document.getElementById('orderWarehouse').innerHTML = '<option value="">Спочатку оберіть місто</option>';
+            return;
+        }
+
+        // Затримка перед відправкою запиту (щоб не спамити API при швидкому друку)
+        npSearchTimeout = setTimeout(() => {
+            fetchNovaPoshtaCities(query);
+        }, 500);
+    });
+
+    // Ховаємо випадаючий список міст, якщо клікнули поза ним
+    document.addEventListener('click', function(e) {
+        if (e.target.id !== 'orderCity') {
+            const resultsList = document.getElementById('citySearchResults');
+            if (resultsList) resultsList.style.display = 'none';
+        }
+    });
+}
+
+// Запит міст до API Нової Пошти
+async function fetchNovaPoshtaCities(query) {
+    const url = 'https://api.novaposhta.ua/v2.0/json/';
+    const body = {
+        apiKey: NP_API_KEY,
+        modelName: "Address",
+        calledMethod: "searchSettlements",
+        methodProperties: {
+            CityName: query,
+            Limit: "50"
+        }
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        const data = await response.json();
+        
+        if (data.success && data.data.length > 0 && data.data[0].Addresses.length > 0) {
+            renderCityResults(data.data[0].Addresses);
+        } else {
+            document.getElementById('citySearchResults').style.display = 'none';
+        }
+    } catch (error) {
+        console.error("Помилка завантаження міст НП:", error);
+    }
+}
+
+// Відображення списку знайдених міст
+function renderCityResults(addresses) {
+    const list = document.getElementById('citySearchResults');
+    list.innerHTML = '';
+    
+    addresses.forEach(address => {
+        const li = document.createElement('li');
+        li.textContent = address.Present; // Наприклад: "м. Київ, Київська обл."
+        // При кліку зберігаємо Ref міста
+        li.onclick = () => selectNovaPoshtaCity(address.DeliveryCity, address.Present);
+        list.appendChild(li);
+    });
+    
+    list.style.display = 'block';
+}
+
+// Дія при виборі міста
+function selectNovaPoshtaCity(cityRef, presentName) {
+    document.getElementById('orderCity').value = presentName;
+    document.getElementById('orderCityRef').value = cityRef;
+    document.getElementById('citySearchResults').style.display = 'none';
+    
+    // Одразу шукаємо відділення для цього міста
+    fetchNovaPoshtaWarehouses(cityRef);
+}
+
+// Запит відділень до API Нової Пошти
+async function fetchNovaPoshtaWarehouses(cityRef) {
+    const warehouseSelect = document.getElementById('orderWarehouse');
+    warehouseSelect.innerHTML = '<option value="">Завантаження відділень...</option>';
+    warehouseSelect.disabled = true;
+
+    const url = 'https://api.novaposhta.ua/v2.0/json/';
+    const body = {
+        apiKey: NP_API_KEY,
+        modelName: "Address",
+        calledMethod: "getWarehouses",
+        methodProperties: {
+            CityRef: cityRef
+        }
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+        const data = await response.json();
+        
+        if (data.success && data.data.length > 0) {
+            warehouseSelect.innerHTML = '<option value="">Оберіть відділення або поштомат</option>';
+            data.data.forEach(warehouse => {
+                const option = document.createElement('option');
+                option.value = warehouse.Ref; // Системний код для CRM
+                option.textContent = warehouse.Description;
+                warehouseSelect.appendChild(option);
+            });
+            warehouseSelect.disabled = false;
+        } else {
+            warehouseSelect.innerHTML = '<option value="">У цьому місті немає відділень</option>';
+        }
+    } catch (error) {
+        console.error("Помилка завантаження відділень НП:", error);
+        warehouseSelect.innerHTML = '<option value="">Помилка завантаження</option>';
+    }
+}
+
+// ==========================================
 // ЛОГІКА ДЛЯ ЧАТУ ТА МЕСЕНДЖЕРІВ
 // ==========================================
-
 document.addEventListener('DOMContentLoaded', () => {
     injectCartHTML();
     updateCartUI();
 
-    // Автоматичне відкриття чату через 5 секунд (якщо не закривали)
     if (!sessionStorage.getItem('chatClosedByUser')) {
         setTimeout(() => {
             const chatWindow = document.getElementById('chatWindow');
