@@ -633,3 +633,18 @@ document.addEventListener('click', (e) => {
         menu.style.display = 'none';
     }
 });
+// Автоматическое добавление рекламного блока marketslon
+document.addEventListener('DOMContentLoaded', () => {
+    const contentArea = document.querySelector('.content-area');
+    if (contentArea) {
+        // Проверяем, нет ли уже старого блока, чтобы не дублировать
+        if (!document.querySelector('.marketslon-promo')) {
+            const promoHTML = `
+                <div class="marketslon-promo" style="text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid #E5E7EB; font-size: 0.9rem; color: #6B7280;">
+                    <p>Сайт розроблений компанією <a href="https://marketslon.com.ua" target="_blank" class="promo-highlight" style="text-decoration: none; color: #3B71CA; font-weight: 600;">marketslon.com.ua</a></p>
+                </div>
+            `;
+            contentArea.insertAdjacentHTML('beforeend', promoHTML);
+        }
+    }
+});
