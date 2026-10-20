@@ -317,7 +317,8 @@ function backToCart() {
     document.getElementById('cartStep1').style.display = 'block';
 }
 
-function submitOrder() {
+// 💥 ОНОВЛЕНА ФУНКЦІЯ ВІДПРАВКИ В SALESDRIVE 💥
+async function submitOrder() {
     let phone = document.getElementById('orderPhone').value.trim();
     let email = document.getElementById('orderEmail').value.trim();
     let lastName = document.getElementById('orderLastName').value.trim();
@@ -336,28 +337,64 @@ function submitOrder() {
         return;
     }
 
-    let orderDetailsList = cart.map(item => {
-        let boxPrice = item.pricePerItem * item.boxQty;
-        return `📦 ${item.name} (Код: ${item.sku || 'Немає'})\n    ${item.boxes} ящ. x ${boxPrice} ₴ = ${item.boxes * boxPrice} ₴`;
-    }).join('\n');
+    // 1. Формуємо товари для SalesDrive
+    let sdProducts = cart.map(item => ({
+        "id": item.sku,
+        "name": item.name,
+        "costPerItem": item.pricePerItem * item.boxQty,
+        "amount": item.boxes
+    }));
 
-    let totalPrice = cart.reduce((sum, item) => sum + (item.pricePerItem * item.boxQty * item.boxes), 0);
-    let commentText = comment ? `\nКоментар: ${comment}` : '';
-    let emailText = email ? `\n📧 Email: ${email}` : '';
+    // 2. Формуємо об'єкт замовлення за документацією SalesDrive
+    let orderData = {
+        "sajt": "Сайт ProMaxPak",
+        "fName": firstName,
+        "lName": lastName,
+        "phone": phone,
+        "email": email,
+        "comment": comment,
+        "payment_method": payment,
+        "shipping_method": "Нова Пошта",
+        "novaposhta": {
+            "ServiceType": "Warehouse",
+            "city": city,
+            "WarehouseNumber": warehouseRef
+        },
+        "products": sdProducts
+    };
 
-    let finalMessage = `✅ НОВЕ ЗАМОВЛЕННЯ\n\n` +
-                        `👤 Клієнт: ${lastName} ${firstName}\n` +
-                        `📞 Телефон: ${phone}${emailText}\n` +
-                        `🚚 Доставка: ${city}, ${warehouseName}\n` +
-                        `💳 Оплата: ${payment}${commentText}\n\n` +
-                        `🛒 ТОВАРИ:\n${orderDetailsList}\n\n` +
-                        `💰 ЗАГАЛЬНА СУМА: ${totalPrice} ₴`;
+    let btn = document.querySelector('.btn-checkout-primary');
+    let originalBtnText = btn.innerText;
+    btn.innerText = 'Відправляємо...';
+    btn.disabled = true;
 
-    alert(finalMessage);
-    
-    cart = [];
-    saveCart();
-    closeCartModal();
+    try {
+        // ТУТ ПІДСТАВЛЕНО ВАШ ДОМЕН powerpack
+        const response = await fetch('https://powerpack.salesdrive.me/api/order/add/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Api-Key': 'S7LBIkqvm6BDb2YqSjxRjCaSV_4bhXzNa83RQjRWLXFaB8m7811pqCj2KncH9kEEROaAr'
+            },
+            body: JSON.stringify(orderData)
+        });
+
+        if (response.ok) {
+            alert('✅ Ваше замовлення успішно оформлено! Менеджер зв\'яжеться з вами найближчим часом.');
+            cart = [];
+            saveCart();
+            closeCartModal();
+        } else {
+            alert('❌ Виникла помилка при відправці замовлення. Будь ласка, зателефонуйте нам.');
+        }
+    } catch (error) {
+        console.error('Помилка відправки в CRM:', error);
+        alert('❌ Виникла помилка підключення. Будь ласка, спробуйте пізніше або зателефонуйте нам.');
+    } finally {
+        // Повертаємо кнопку в нормальний стан
+        btn.innerText = originalBtnText;
+        btn.disabled = false;
+    }
 }
 
 function openProductModalFromCard(element) {
