@@ -1,5 +1,5 @@
 let cart = JSON.parse(localStorage.getItem('promaxpak_cart')) || [];
-const NP_API_KEY = '7dbda2a14b42158ebef8066b2f396262'; 
+const NP_API_KEY = ''; 
 
 // ==========================================
 // 1. ГЕНЕРАЦІЯ КОШИКА ТА ФОРМИ
